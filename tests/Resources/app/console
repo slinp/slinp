@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__.'/../bootstrap.php';
+
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+
+$input = new ArgvInput();
+
+require('AppKernel.php');
+$kernel = new AppKernel('test', true);
+
+$application = new Application($kernel);
+$application->run($input);
+

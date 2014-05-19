@@ -1,0 +1,25 @@
+{
+    "name": "dtl/slinp-bundle",
+    "license": "MIT",
+    "type": "project",
+    "description": "Core Slinp Bundle",
+    "autoload": {
+        "psr-0": { 
+            "Slinp\\SlinpBundle": "src"
+        }
+    },
+    "target-dir": "Slinp\\SlinpBundle",
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/symfony": "~2.4",
+        "doctrine/doctrine-bundle": "~1.2",
+        "doctrine/phpcr-bundle": "dev-master",
+        "phpcr/phpcr-utils": "dev-master",
+        "symfony-cmf/routing-bundle": "1.2.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "2.1.x-dev",
+        "symfony-cmf/testing": "1.1.*"
+    }
+}
+

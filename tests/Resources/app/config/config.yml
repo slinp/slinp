@@ -1,0 +1,39 @@
+framework:
+    secret: thisisatest
+    test: ~
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "en"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        handler_id:  ~
+    fragments:       ~
+    http_method_override: true
+
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+doctrine:
+    dbal:
+        driver:   pdo_sqlite
+        path: "%kernel.root_dir%/cache/app.sqlite"
+        charset:  UTF8
+
+doctrine_phpcr:
+    session:
+        backend:
+            type: doctrinedbal
+            logging: true
+            profiling: true
+        workspace: default
+        username: admin
+        password: admin

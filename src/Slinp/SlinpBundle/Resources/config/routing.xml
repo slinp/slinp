@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="slinp.routing.matcher.class">Slinp\SlinpBundle\Routing\SlinpResourceMatcher</parameter>
+    </parameters>
+
+    <services>
+        <service id="slinp.routing.matcher" class="%slinp.routing.matcher.class%">
+            <argument type="service" id="doctrine_phpcr" />
+            <argument>/web</argument>
+        </service>
+
+        <service id="router_listener" class="%router_listener.class%">
+            <tag name="kernel.event_subscriber" />
+            <tag name="monolog.logger" channel="request" />
+            <argument type="service" id="slinp.routing.matcher" />
+            <argument type="service" id="router.request_context" on-invalid="ignore" />
+            <argument type="service" id="logger" on-invalid="ignore" />
+            <argument type="service" id="request_stack" />
+        </service>
+
+    </services>
+</container>
