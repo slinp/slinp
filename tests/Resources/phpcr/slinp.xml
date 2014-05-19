@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sv:node xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:sv="http://www.jcp.org/jcr/sv/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:phpcr_locale="http://www.doctrine-project.org/projects/phpcr_odm/phpcr_locale" xmlns:phpcr="http://www.doctrine-project.org/projects/phpcr_odm" xmlns:slinp="http://slinp.com/ns/1.0" sv:name="root">
+  <sv:property sv:name="jcr:primaryType" sv:type="Name">
+    <sv:value>slinp:root</sv:value>
+  </sv:property>
+  <sv:node sv:name="web">
+    <sv:property sv:name="jcr:primaryType" sv:type="Name">
+      <sv:value>slinp:webFolder</sv:value>
+    </sv:property>
+    <sv:node sv:name="root">
+      <sv:property sv:name="jcr:primaryType" sv:type="Name">
+        <sv:value>slinp:article</sv:value>
+      </sv:property>
+      <sv:property sv:name="jcr:createdBy" sv:type="String">
+        <sv:value>admin</sv:value>
+      </sv:property>
+      <sv:property sv:name="jcr:created" sv:type="Date">
+        <sv:value>2014-05-19T08:29:24.000+00:00</sv:value>
+      </sv:property>
+      <sv:property sv:name="jcr:lastModifiedBy" sv:type="String">
+        <sv:value>admin</sv:value>
+      </sv:property>
+      <sv:property sv:name="jcr:lastModified" sv:type="Date">
+        <sv:value>2014-05-19T08:42:28.000+00:00</sv:value>
+      </sv:property>
+      <sv:property sv:name="format" sv:type="String">
+        <sv:value>markdown</sv:value>
+      </sv:property>
+      <sv:property sv:name="title" sv:type="String">
+        <sv:value>mytitle</sv:value>
+      </sv:property>
+      <sv:property sv:name="text" sv:type="String">
+        <sv:value># Slinp
+
+Slinp is a Web Content Framework based on Symfony and PHPCR.
+
+Slinp routes requests to controllers by first finding a *node* that
+corresponds to the incoming URL and then the controller is determined
+based on the type of the node.
+
+The nodes which are "exposed" to the web are kept in a special folder "web".
+The nodes found within this folder can additionally be classed as *resources*.
+
+For example, you have a node in your content repository at `/web/articles/my-article`
+it has the type `MyCms:Article`. if we request `/articles/my-article` the
+request will be forwarded to the controller `MyCmsBundle:Article:default`,
+which can then create a response based upon the node.
+
+````php
+&lt;?php
+
+namespace MyCmsBundle\Controller;
+
+class ArticleController
+{
+    public function defaultAction($node)
+    {
+        return $this-&gt;render('MyCmsBundle:Article:default.html.twig', array(
+            'node' =&gt; $node
+        ));
+    }
+}
+````
+
+## What is a Slinp?
+
+Slip is influenced by the Apache Sling project, originally I wanted to call it
+Pling, but that name is already used by various projects. So I put the "P" at
+the end instead. Clever no?
+
+## When resources are not enough
+
+This model allows content to be routed to a single action in a controller. But
+what do we do when the action relies upon sub-actions? For example, a page to
+show all the comments of an article?
+
+Slinp allows you to append additional routes to a resource using Annotations
+in the controller:
+
+````
+&lt;?php
+
+class ArticleController extends Controller
+{
+    // ...
+
+    /**
+     * @Slinp\Route(pattern=/comments)
+     */
+    public function commentsAction($node)
+    {
+        return $this-&gt;render('MyCmsBundle:Article:comments.html.twig', array(
+            'node' =&gt; $node-&gt;getChildren('*', 'mycms:comment')
+        ));
+    }
+}
+````
+
+</sv:value>
+      </sv:property>
+      <sv:node sv:name="home">
+        <sv:property sv:name="jcr:primaryType" sv:type="Name">
+          <sv:value>slinp:article</sv:value>
+        </sv:property>
+        <sv:property sv:name="jcr:createdBy" sv:type="String">
+          <sv:value>admin</sv:value>
+        </sv:property>
+        <sv:property sv:name="jcr:created" sv:type="Date">
+          <sv:value>2014-05-19T08:30:52.000+00:00</sv:value>
+        </sv:property>
+        <sv:property sv:name="jcr:lastModifiedBy" sv:type="String">
+          <sv:value>admin</sv:value>
+        </sv:property>
+        <sv:property sv:name="jcr:lastModified" sv:type="Date">
+          <sv:value>2014-05-19T08:30:52.000+00:00</sv:value>
+        </sv:property>
+        <sv:property sv:name="format" sv:type="String">
+          <sv:value>plain</sv:value>
+        </sv:property>
+      </sv:node>
+    </sv:node>
+  </sv:node>
+</sv:node>

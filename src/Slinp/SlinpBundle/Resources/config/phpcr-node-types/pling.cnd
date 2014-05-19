@@ -1,0 +1,21 @@
+<slinp = "http://slinp.com/ns/1.0">
+
+[slinp:mix:title]
+mixin
+- title (string)
+
+[slinp:mix:richText]
+- text (string)
+- format (string) = 'plain' autocreated
+
+[slinp:resource] > mix:created, mix:lastModified, nt:base
+abstract
++ * (slinp:resource)
+
+[slinp:webFolder] > nt:base
++ root (slinp:resource)
+
+[slinp:root] > nt:base
++ web (slinp:webFolder) = slinp:webFolder autocreated
+
+[slinp:article] > slinp:resource, slinp:mix:title, slinp:mix:richText
