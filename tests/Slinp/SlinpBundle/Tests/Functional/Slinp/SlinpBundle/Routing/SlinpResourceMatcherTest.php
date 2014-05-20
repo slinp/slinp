@@ -2,11 +2,11 @@
 
 namespace Functional\Slinp\SlinpBundle\Routing;
 
-use Slinp\SlinpBundle\Routing\SlinpResourceMatcher;
+use Slinp\SlinpBundle\Routing\SlinpMatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Slinp\SlinpBundle\Tests\Functional\BaseTestCase;
 
-class SlinpResourceMatcherTest extends BaseTestCase
+class SlinpMatcherTest extends BaseTestCase
 {
     protected $matcher;
 
@@ -14,32 +14,36 @@ class SlinpResourceMatcherTest extends BaseTestCase
     {
         parent::setUp();
         $this->loadFixtures('website.xml');
-        $logger = $this->getContainer()->get('logger');
-        $this->matcher = new SlinpResourceMatcher($this->getManagerRegistry(), '/slinp/web', $logger);
+
+        $this->matcher = $this->getContainer()->get('slinp.routing.matcher');
     }
 
     public function provideMatchTest()
     {
         return array(
             // should be the homepage
-            array('/', 'SlinpBundle:Article:default'),
+            array('/', 'Slinp\SlinpBundle\Controller\ArticleController::showAction'),
 
             // should be an ArticleFolder
-            array('/articles', 'SlinpBundle:ArticleFolder:default'),
+            array('/articles', 'Slinp\SlinpBundle\Controller\ArticleFolderController::indexAction'),
 
             // should find this one
-            array('/articles/Faster-than-light', 'SlinpBundle:Article:default'),
+            array('/articles/Faster-than-light', 'Slinp\SlinpBundle\Controller\ArticleController::showAction'),
 
             // unknown suffix should fall back to first known suffix
-            array('/articles/foobar/barfoo', 'SlinpBundle:ArticleFolder:default'),
+            array('/articles/foobar/barfoo', 'Slinp\SlinpBundle\Controller\ArticleFolderController::indexAction', true),
         );
     }
 
     /**
      * @dataProvider provideMatchTest
      */
-    public function testRoutingMatch($uri, $expectedController)
+    public function testRoutingMatch($uri, $expectedController, $notFound = false)
     {
+        if ($notFound) {
+            $this->setExpectedException('Symfony\Component\Routing\Exception\ResourceNotFoundException');
+        }
+
         $request = Request::create($uri);
         $res = $this->matcher->matchRequest($request);
 
@@ -47,7 +51,7 @@ class SlinpResourceMatcherTest extends BaseTestCase
     }
 
     /**
-     * @expectedException RouteNotFoundException
+     * @expectedException Symfony\Component\Routing\Exception\RouteNotFoundException
      */
     public function testRoutingNotMatch()
     {

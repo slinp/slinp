@@ -5,13 +5,18 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="slinp.routing.matcher.class">Slinp\SlinpBundle\Routing\SlinpResourceMatcher</parameter>
+        <parameter key="slinp.routing.matcher.class">Slinp\SlinpBundle\Routing\SlinpMatcher</parameter>
+
+        <parameter key="slinp.routing.loader.annot_file.class">Symfony\Component\Routing\Loader\AnnotationFileLoader</parameter>
+        <parameter key="slinp.routing.loader.annot_class.class">Slinp\SlinpBundle\Routing\SlinpAnnotationLoader</parameter>
     </parameters>
 
     <services>
         <service id="slinp.routing.matcher" class="%slinp.routing.matcher.class%">
             <argument type="service" id="doctrine_phpcr" />
-            <argument>/web</argument>
+            <argument>/slinp/web</argument>
+            <argument type="service" id="slinp.routing.loader.annot_file" />
+            <argument type="service" id="kernel" />
             <argument type="service" id="logger" />
         </service>
 
@@ -22,6 +27,19 @@
             <argument type="service" id="router.request_context" on-invalid="ignore" />
             <argument type="service" id="logger" on-invalid="ignore" />
             <argument type="service" id="request_stack" />
+        </service>
+
+        <!-- Annotation routing loader -->
+
+        <service id="slinp.routing.loader.annot_file" class="%slinp.routing.loader.annot_file.class%" public="false">
+            <tag name="routing.loader" />
+            <argument type="service" id="file_locator" />
+            <argument type="service" id="slinp.routing.loader.annot_class" />
+        </service>
+
+        <service id="slinp.routing.loader.annot_class" class="%slinp.routing.loader.annot_class.class%" public="false">
+            <tag name="routing.loader" />
+            <argument type="service" id="annotation_reader" />
         </service>
 
     </services>

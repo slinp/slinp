@@ -10,3 +10,5 @@ if (!$loader = include $vendorDir.'/autoload.php') {
         'curl -s http://getcomposer.org/installer | php'.$nl.
         'php composer.phar install'.$nl);
 }
+
+Doctrine\Common\Annotations\AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
