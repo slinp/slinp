@@ -5,14 +5,14 @@ namespace Slinp\SlinpBundle\Controller;
 class FileController extends Controller
 {
     /**
-     * @Slinp\Route(node-type="nt:file", pattern="/")
+     * @Slinp\Route(pattern="/")
      */
     public function defaultAction($node)
     {
     }
 
     /**
-     * @Slinp\Route(node-type="nt:unstructured", pattern="/delete")
+     * @Slinp\Route(pattern="/delete")
      */
     public function deleteAction($node)
     {

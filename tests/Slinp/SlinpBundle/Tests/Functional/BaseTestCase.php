@@ -5,7 +5,7 @@ namespace Slinp\SlinpBundle\Tests\Functional;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use PHPCR\ImportUUIDBehaviorInterface;
 
-class BaseTestCase extends WebTestCase
+abstract class BaseTestCase extends WebTestCase
 {
     private $container;
     private $session;

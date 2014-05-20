@@ -14,6 +14,21 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 
+/**
+ * Incoming request matcher
+ *
+ * This matcher first looks for a node in the content repository,
+ * then infers a ControllerName from the node:type, e.g.
+ *
+ *     slinp:article => Slinp\SlinpBundle\Controller\ArticleController
+ *
+ * The controller is then parsed for @Route annotations and the URL is
+ * matched and routed to one of the controllers methods.
+ *
+ * @todo Refactor this into separate classes.
+ *
+ * @author Daniel Leech <daniel@dantleech.com>
+ */
 class SlinpMatcher implements RequestMatcherInterface
 {
     protected $registry;
