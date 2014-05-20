@@ -1,5 +1,7 @@
 # Slinp
 
+**WARNING**: This is under heavy development!
+
 Slinp is a Web Content Framework based on Symfony and PHPCR.
 
 Slinp maps incoming requests to a path in the PHPCR content repository.  The
