@@ -51,9 +51,13 @@ class ArticleController extends Controller
 
 ## What is a Slinp?
 
-Slip is influenced by the Apache Sling project, originally I wanted to call it
-Pling, but that name is already used by various projects. So I put the "P" at
-the end instead. Clever no?
+I had been thinking about node-type based routing for some time I think, and
+after 2 aborted projects I heard about the Apahce Sling project. Sling
+corresponded very closely to what I wanted to achieve, so after reading about
+Sling and implementing some of its ideas Slinp was born.
+
+Originally I wanted to call it Pling, but that name is already used by various 
+projects. So I put the "P" at the end instead. Clever no?
 
 ## Why use Slinp?
 
