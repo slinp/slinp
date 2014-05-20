@@ -4,6 +4,7 @@ php:
   - 5.4
 
 before_script:
-  - vendor/symfony-cmf/testing/bin/travis/phpcr_odm_doctrine_dbal.sh
+  - composer install --dev
+  - tests/bin/init.sh
 
 script: phpunit --coverage-text
