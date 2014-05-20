@@ -4,21 +4,20 @@
 
 Slinp is a Web Content Framework based on Symfony and PHPCR.
 
-Slinp maps incoming requests to a path in the PHPCR content repository.  The
-node type of the corresponding resource (i.e. node) is then used to determine
+Slinp **maps incoming requests** to a path in the PHPCR content repository.  The
+**node type** of the resource (i.e. node) at the path is then used to determine
 which controller to use.
 
-Route annotations in the controller decide which URLs are available for the
-located resource and the request is routed accordingly.
+The routing works like this:
 
-All web facing nodes are located in `/slinp/web`. The "root" page (i.e. the
-one that corresponds to the URL `/`) has a special name: `root`.
+- Incoming HTTP request: `/foobar`
+- Map request to PHPCR path: `/slinp/root/foobar`
+- Get node type of node at `/slinp/root/foobar` => `slinp:article`
+- Determine bundle and controller name: `SlinpBundle:Article`
+- Read the routes from annotations in the controller
+- Route the request!
 
-For example, you have a node in your repository at `/slinp/web/root/about-me`
-which has the node type `slinp:article`. Slinp will determine that the
-controller to use should be `SlinpBundle:Article`. Slinp will then scan
-this controller for `@Route` annotations and route the request accordingly.
-
+An example controller looks like this:
 
 ````php
 <?php
@@ -28,6 +27,7 @@ namespace Slinp\SlinpBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Slinp\SlinpBundle\Annotation\Route;
 
+// controller for node type "slinp:article"
 class ArticleController extends Controller
 {
     /**
@@ -54,3 +54,25 @@ class ArticleController extends Controller
 Slip is influenced by the Apache Sling project, originally I wanted to call it
 Pling, but that name is already used by various projects. So I put the "P" at
 the end instead. Clever no?
+
+## Why use Slinp?
+
+- **Low development time** -- Define some node types, create a controller, some
+  templates, and your done -- or just use the built-in node types and
+  controllers and create some content!
+- **Node type based routing** -- Slinp is content-centric. You can put your
+  content where you want and it will always be rendered by the same
+  controller. The ability to add routes to resources via. annotations makes
+  Slinp web application friendly.
+- **Schematic CMS design** -- You can define your content the way you want
+  using PHPCRs node types -- be as strict or as loose as you like! Also you can
+  create automatically created nodes and properties.
+
+## Why should I use Slinp in the future?
+
+Slinp isn't finished yet..
+
+- **Admin Generation** -- Node types provide perfect meta data for generating
+  admin forms. And because of the inheritance of node types admin forms will
+  always fallback to the admin form defined for `slinp:resource`. Basically -
+  instant admin, no fuss.
