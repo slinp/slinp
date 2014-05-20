@@ -12,6 +12,7 @@
         <service id="slinp.routing.matcher" class="%slinp.routing.matcher.class%">
             <argument type="service" id="doctrine_phpcr" />
             <argument>/web</argument>
+            <argument type="service" id="logger" />
         </service>
 
         <service id="router_listener" class="%router_listener.class%">

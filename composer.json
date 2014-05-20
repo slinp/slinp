@@ -5,6 +5,7 @@
     "description": "Core Slinp Bundle",
     "autoload": {
         "psr-0": { 
+            "Slinp\\SlinpBundle\\Tests": "tests",
             "Slinp\\SlinpBundle": "src"
         }
     },

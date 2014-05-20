@@ -5,7 +5,7 @@
 >
     <testsuites>
         <testsuite name="Slinp Bundle test suite">
-            <directory>./Tests</directory>
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
 

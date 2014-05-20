@@ -6,7 +6,7 @@ mixin
 
 [slinp:mix:richText]
 - text (string)
-- format (string) = 'plain' autocreated
+- format (string)
 
 [slinp:resource] > mix:created, mix:lastModified, nt:base
 abstract
@@ -19,3 +19,6 @@ abstract
 + web (slinp:webFolder) = slinp:webFolder autocreated
 
 [slinp:article] > slinp:resource, slinp:mix:title, slinp:mix:richText
+
+[slinp:articleFolder] > slinp:resource
++ * (slinp:article)

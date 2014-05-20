@@ -28,11 +28,18 @@ doctrine:
         path: "%kernel.root_dir%/cache/app.sqlite"
         charset:  UTF8
 
+monolog:
+    handlers:
+        main:
+            type:  stream
+            path:  %kernel.logs_dir%/%kernel.environment%.log
+            level: debug
+
 doctrine_phpcr:
     session:
         backend:
             type: doctrinedbal
-            logging: true
+            logging: false
             profiling: true
         workspace: default
         username: admin
