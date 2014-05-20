@@ -2,30 +2,47 @@
 
 Slinp is a Web Content Framework based on Symfony and PHPCR.
 
-Slinp routes requests to controllers by first finding a *node* that
-corresponds to the incoming URL and then the controller is determined
-based on the type of the node.
+Slinp maps incoming requests to a path in the PHPCR content repository.  The
+node type of the corresponding resource (i.e. node) is then used to determine
+which controller to use.
 
-The nodes which are "exposed" to the web are kept in a special folder "web".
-The nodes found within this folder can additionally be classed as *resources*.
+Route annotations in the controller decide which URLs are available for the
+located resource and the request is routed accordingly.
 
-For example, you have a node in your content repository at `/web/articles/my-article`
-it has the type `MyCms:Article`. if we request `/articles/my-article` the
-request will be forwarded to the controller `MyCmsBundle:Article:default`,
-which can then create a response based upon the node.
+All web facing nodes are located in `/slinp/web`. The "root" page (i.e. the
+one that corresponds to the URL `/`) has a special name: `root`.
+
+For example, you have a node in your repository at `/slinp/web/root/about-me`
+which has the node type `slinp:article`. Slinp will determine that the
+controller to use should be `SlinpBundle:Article`. Slinp will then scan
+this controller for `@Route` annotations and route the request accordingly.
+
 
 ````php
 <?php
 
-namespace MyCmsBundle\Controller;
+namespace Slinp\SlinpBundle\Controller;
 
-class ArticleController
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Slinp\SlinpBundle\Annotation\Route;
+
+class ArticleController extends Controller
 {
-    public function defaultAction($node)
+    /**
+     * @Route(pattern="/")
+     */
+    public function showAction($node)
     {
-        return $this->render('MyCmsBundle:Article:default.html.twig', array(
-            'node' => $node
-        ));
+        return $this->render('SlinpBundle:Article:show', $node);
+    }
+
+    /**
+     * @Route(pattern="/edit")
+     */
+    public function editAction($node)
+    {
+        // process some editing
+        return $this->render('SlinpBundle:Article:edit', $node);
     }
 }
 ````
@@ -35,31 +52,3 @@ class ArticleController
 Slip is influenced by the Apache Sling project, originally I wanted to call it
 Pling, but that name is already used by various projects. So I put the "P" at
 the end instead. Clever no?
-
-## When resources are not enough
-
-This model allows content to be routed to a single action in a controller. But
-what do we do when the action relies upon sub-actions? For example, a page to
-show all the comments of an article?
-
-Slinp allows you to append additional routes to a resource using Annotations
-in the controller:
-
-````
-<?php
-
-class ArticleController extends Controller
-{
-    // ...
-
-    /**
-     * @Slinp\Route(pattern=/comments)
-     */
-    public function commentsAction($node)
-    {
-        return $this->render('MyCmsBundle:Article:comments.html.twig', array(
-            'node' => $node->getChildren('*', 'mycms:comment')
-        ));
-    }
-}
-````

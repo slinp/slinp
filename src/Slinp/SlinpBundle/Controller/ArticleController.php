@@ -10,14 +10,17 @@ class ArticleController extends Controller
     /**
      * @Route(pattern="/")
      */
-    public function showAction()
+    public function showAction($node)
     {
+        return $this->render('SlinpBundle:Article:show', $node);
     }
 
     /**
      * @Route(pattern="/edit")
      */
-    public function editAction()
+    public function editAction($node)
     {
+        // process some editing
+        return $this->render('SlinpBundle:Article:edit', $node);
     }
 }
