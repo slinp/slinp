@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sv:node xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:sv="http://www.jcp.org/jcr/sv/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:phpcr_locale="http://www.doctrine-project.org/projects/phpcr_odm/phpcr_locale" xmlns:phpcr="http://www.doctrine-project.org/projects/phpcr_odm" xmlns:slinp="http://slinp.com/ns/1.0" sv:name="slinp">
+  <sv:property sv:name="jcr:primaryType" sv:type="Name">
+    <sv:value>slinp:root</sv:value>
+  </sv:property>
+  <sv:node sv:name="web">
+    <sv:property sv:name="jcr:primaryType" sv:type="Name">
+      <sv:value>slinp:webFolder</sv:value>
+    </sv:property>
+  </sv:node>
+</sv:node>

@@ -6,5 +6,5 @@ use PHPCR\NodeInterface;
 
 interface NodeLoader
 {
-    public function load(NodeInterface $node, $resource);
+    public function load($resource);
 }

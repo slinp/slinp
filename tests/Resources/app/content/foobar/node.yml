@@ -1,0 +1,8 @@
+jcr:primaryType: 
+    value: slinpTest:article
+title: 
+    value: This is the Foobar page.
+text:
+    value: |
+        The foobar page is real important.
+

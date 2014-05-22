@@ -8,25 +8,8 @@ use PHPCR\PropertyType;
 
 class NodeLoaderYaml implements NodeLoader
 {
-    public function load(NodeInterface $node, $resource)
+    public function load($resource)
     {
-        $yaml = Yaml::parse(file_get_contents($resource));
-
-        foreach ($yaml as $propertyName => $propertyAttributes) {
-            $type = null;
-            $value = null;
-
-            if (isset($propertyAttributes['type'])) {
-                $type = PropertyType::valueFromName($propertyAttributes['type']);
-            }
-
-
-            if (isset($propertyAttributes['value'])) {
-                $value = $propertyAttributes['value'];
-            }
-
-
-            $node->setProperty($propertyName, $value, $type);
-        }
+        return Yaml::parse(file_get_contents($resource));
     }
 }
