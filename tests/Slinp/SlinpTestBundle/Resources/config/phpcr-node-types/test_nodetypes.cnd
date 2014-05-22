@@ -1,3 +1,7 @@
-<slinp = "http://slinp.com/ns/1.0">
+<slinpTest = "http://slinp.org/test/ns/1.0">
 
-[slinp:contactPage] > slinp:article
+[slinpTest:article] > nt:base
+- title (string) mandatory
+- subtitle (string)
+- body (string) mandatory
++ * (slinptest:article)

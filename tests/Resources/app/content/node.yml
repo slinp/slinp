@@ -1,0 +1,8 @@
+jcr:primaryType: 
+    value: slinpTest:article
+title: 
+    value: Welcome to the Slinp test application
+text:
+    value: |
+        This is the Slinp test application. This is the root node in the <code>web</code> folder and
+        has type <code>slinp:article</code>

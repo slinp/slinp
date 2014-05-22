@@ -1,4 +1,4 @@
-<slinp = "http://slinp.com/ns/1.0">
+<slinp = "http://slinp.org/ns/1.0">
 
 [slinp:mix:title]
 mixin
