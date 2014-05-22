@@ -13,6 +13,7 @@ class AppKernel extends TestKernel
 
         $this->addBundles(array(
             new \Slinp\SlinpBundle\SlinpBundle(),
+            new \Slinp\SlinpTestBundle\SlinpTestBundle(),
         ));
     }
 

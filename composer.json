@@ -6,7 +6,8 @@
     "autoload": {
         "psr-0": { 
             "Slinp\\SlinpBundle\\Tests": "tests",
-            "Slinp\\SlinpBundle": "src"
+            "Slinp\\SlinpBundle": "src",
+            "Slinp\\SlinpTestBundle": "tests"
         }
     },
     "target-dir": "Slinp\\SlinpBundle",
