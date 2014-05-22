@@ -1,5 +1,8 @@
 # Slinp
 
+[![Build
+Status](https://travis-ci.org/dantleech/slinp.svg?branch=master)](https://travis-ci.org/dantleech/slinp)
+
 **WARNING**: This is under heavy development!
 
 Slinp is a Web Content Framework based on Symfony and PHPCR.
