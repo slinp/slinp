@@ -10,7 +10,6 @@
             "Slinp\\SlinpTestBundle": "tests"
         }
     },
-    "target-dir": "Slinp\\SlinpBundle",
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "~2.4",
