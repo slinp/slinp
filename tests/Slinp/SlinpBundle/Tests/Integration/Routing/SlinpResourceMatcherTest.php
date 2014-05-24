@@ -1,12 +1,12 @@
 <?php
 
-namespace Functional\Slinp\SlinpBundle\Routing;
+namespace Slinp\SlinpBundle\Tests\Integration\Routing;
 
 use Slinp\SlinpBundle\Routing\SlinpMatcher;
 use Symfony\Component\HttpFoundation\Request;
-use Slinp\SlinpBundle\Tests\Functional\BaseTestCase;
+use Slinp\SlinpBundle\Test\WebTestCase;
 
-class SlinpMatcherTest extends BaseTestCase
+class SlinpMatcherTest extends WebTestCase
 {
     protected $matcher;
 

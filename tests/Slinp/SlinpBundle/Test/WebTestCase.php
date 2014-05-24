@@ -1,11 +1,11 @@
 <?php
 
-namespace Slinp\SlinpBundle\Tests\Functional;
+namespace Slinp\SlinpBundle\Test;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as BaseWebTestCase;
 use PHPCR\ImportUUIDBehaviorInterface;
 
-abstract class BaseTestCase extends WebTestCase
+abstract class WebTestCase extends BaseWebTestCase
 {
     private $container;
     private $session;
@@ -37,7 +37,7 @@ abstract class BaseTestCase extends WebTestCase
 
     public function loadFixtures($filename)
     {
-        $fixturePath = __DIR__ . '/../../../../Resources/fixtures/' . $filename;
+        $fixturePath = __DIR__ . '/../../../Resources/fixtures/' . $filename;
 
         if (!file_exists($fixturePath)) {
             throw new \InvalidArgumentException('Fixture file ' . $fixturePath . ' does not exist.');
@@ -61,5 +61,4 @@ abstract class BaseTestCase extends WebTestCase
 
         return $this->container;
     }
-
 }

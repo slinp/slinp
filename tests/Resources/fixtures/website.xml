@@ -21,7 +21,7 @@
         <sv:value>markdown</sv:value>
       </sv:property>
       <sv:property sv:name="title" sv:type="String">
-        <sv:value>mytitle</sv:value>
+        <sv:value>Slinp Web Content Framework</sv:value>
       </sv:property>
       <sv:property sv:name="text" sv:type="String">
         <sv:value># Slinp

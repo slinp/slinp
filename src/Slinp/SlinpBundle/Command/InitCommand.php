@@ -45,4 +45,3 @@ class InitCommand extends ContainerAwareCommand
         $session->save();
     }
 }
-

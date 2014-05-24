@@ -17,6 +17,10 @@ class ContentLoadCommand extends ContainerAwareCommand
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $contentLoader = $this->getContainer()->get('slinp.content.content_loader');
+        $contentLoader->setLoggingClosure(function ($message) use ($output) {
+            $output->writeln($message);
+        });
+
         $kernelRoot = $this->getContainer()->getParameter('kernel.root_dir');
         $contentLoader->load($kernelRoot . '/content');
     }

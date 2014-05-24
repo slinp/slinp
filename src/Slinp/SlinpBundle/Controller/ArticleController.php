@@ -12,15 +12,8 @@ class ArticleController extends Controller
      */
     public function showAction($node)
     {
-        return $this->render('SlinpBundle:Article:show', $node);
-    }
-
-    /**
-     * @Route(pattern="/edit")
-     */
-    public function editAction($node)
-    {
-        // process some editing
-        return $this->render('SlinpBundle:Article:edit', $node);
+        return $this->render('SlinpBundle:Article:show.html.twig', array(
+            'node' => $node
+        ));
     }
 }

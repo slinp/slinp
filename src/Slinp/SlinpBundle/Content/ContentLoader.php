@@ -14,12 +14,26 @@ class ContentLoader
     protected $contentPath;
     protected $webPath;
     protected $nodeLoaderFactory;
+    protected $loggingClosure;
 
     public function __construct(ManagerRegistry $registry, NodeLoaderFactory $nodeLoaderFactory, $webPath)
     {
         $this->registry = $registry;
         $this->webPath = $webPath;
         $this->nodeLoaderFactory = $nodeLoaderFactory;
+    }
+
+    public function setLoggingClosure(\Closure $closure)
+    {
+        $this->loggingClosure = $closure;
+    }
+
+    protected function log($message)
+    {
+        if ($this->loggingClosure) {
+            $loggingClosure = $this->loggingClosure;
+            $loggingClosure($message);
+        }
     }
 
     protected function getPhpcrSession()
@@ -31,6 +45,7 @@ class ContentLoader
     {
         $this->contentPath = $contentPath;
         $this->loadNode($this->contentPath);
+        $this->getPhpcrSession()->save();
     }
 
     protected function loadNode($path)
@@ -39,6 +54,7 @@ class ContentLoader
         $session = $this->getPhpcrSession();
 
         $contentPath = $path . '/node.yml';
+        $this->log('Loading: ' . $contentPath);
         if (!file_exists($contentPath)) {
             throw new \InvalidArgumentException(sprintf(
                 'Could not find node.yml content file at file path "%s".',
@@ -103,8 +119,6 @@ class ContentLoader
         foreach ($childDirs as $dir) {
             $this->loadNode($dir);
         }
-
-        $session->save();
     }
 
     protected function getChildDirs($path)
