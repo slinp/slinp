@@ -12,12 +12,24 @@
     </parameters>
 
     <services>
+        <service id="clinp.chain_router" class="%slinp.routing.chain_router.class%">
+        </service>
+
+        <service id="slinp.routing.router" class="%slinp.routing.router.class%">
+            <argument type="service" id="slinp.routing.matcher"/>
+            <argument type="service" id="slinp.routing.generator"/>
+        </service>
+
         <service id="slinp.routing.matcher" class="%slinp.routing.matcher.class%">
             <argument type="service" id="doctrine_phpcr" />
             <argument>/slinp/web</argument>
             <argument type="service" id="slinp.routing.loader.annot_file" />
             <argument type="service" id="kernel" />
             <argument type="service" id="logger" />
+        </service>
+
+        <service id="slinp.routing.generator" class="%slinp.routing.generator.class%">
+            <argument>/slinp/web</argument>
         </service>
 
         <service id="router_listener" class="%router_listener.class%">

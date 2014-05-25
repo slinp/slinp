@@ -12,7 +12,7 @@ class ArticleController extends Controller
      */
     public function showAction($node)
     {
-        return $this->render('SlinpTestBundle:Article:show.html.twig', array(
+        return $this->render('SlinpBundle:Article:show.html.twig', array(
             'node' => $node
         ));
     }
