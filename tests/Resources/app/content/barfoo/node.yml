@@ -2,7 +2,7 @@ jcr:primaryType:
     value: slinpTest:article
 title: 
     value: This is the Barfoo page.
-text:
+body:
     value: |
         The barfoo page is real importanter.
 

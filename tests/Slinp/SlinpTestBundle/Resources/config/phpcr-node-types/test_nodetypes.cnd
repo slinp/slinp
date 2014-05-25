@@ -3,5 +3,7 @@
 
 [slinpTest:article] > slinp:resource
 - title (string) mandatory
-- subtitle (string)
-- text (string) mandatory
+- body (string) mandatory
+
+[slinpTest:articleFolder] > slinp:resource
++ * (slinp:article)

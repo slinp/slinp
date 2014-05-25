@@ -9,7 +9,7 @@
     </sv:property>
     <sv:node sv:name="root">
       <sv:property sv:name="jcr:primaryType" sv:type="Name">
-        <sv:value>slinp:article</sv:value>
+        <sv:value>slinpTest:article</sv:value>
       </sv:property>
       <sv:property sv:name="jcr:lastModifiedBy" sv:type="String">
         <sv:value>admin</sv:value>
@@ -17,13 +17,10 @@
       <sv:property sv:name="jcr:lastModified" sv:type="Date">
         <sv:value>2014-05-20T18:21:15.000+00:00</sv:value>
       </sv:property>
-      <sv:property sv:name="format" sv:type="String">
-        <sv:value>markdown</sv:value>
-      </sv:property>
       <sv:property sv:name="title" sv:type="String">
         <sv:value>Slinp Web Content Framework</sv:value>
       </sv:property>
-      <sv:property sv:name="text" sv:type="String">
+      <sv:property sv:name="body" sv:type="String">
         <sv:value># Slinp
 
 Slinp is a Web Content Framework based on Symfony and PHPCR.
@@ -100,7 +97,7 @@ class ArticleController extends Controller
       </sv:property>
       <sv:node sv:name="home">
         <sv:property sv:name="jcr:primaryType" sv:type="Name">
-          <sv:value>slinp:article</sv:value>
+          <sv:value>slinpTest:article</sv:value>
         </sv:property>
         <sv:property sv:name="jcr:lastModifiedBy" sv:type="String">
           <sv:value>admin</sv:value>
@@ -108,19 +105,22 @@ class ArticleController extends Controller
         <sv:property sv:name="jcr:lastModified" sv:type="Date">
           <sv:value>2014-05-19T08:30:52.000+00:00</sv:value>
         </sv:property>
-        <sv:property sv:name="format" sv:type="String">
-          <sv:value>plain</sv:value>
-        </sv:property>
         <sv:property sv:name="jcr:createdBy" sv:type="String">
           <sv:value>admin</sv:value>
         </sv:property>
         <sv:property sv:name="jcr:created" sv:type="Date">
           <sv:value>2014-05-20T18:16:52.000+00:00</sv:value>
         </sv:property>
+        <sv:property sv:name="title" sv:type="String">
+            <sv:value>Home</sv:value>
+        </sv:property>
+        <sv:property sv:name="body" sv:type="String">
+            <sv:value>Welcome Home</sv:value>
+        </sv:property>
       </sv:node>
       <sv:node sv:name="articles">
         <sv:property sv:name="jcr:primaryType" sv:type="Name">
-          <sv:value>slinp:articleFolder</sv:value>
+          <sv:value>slinpTest:articleFolder</sv:value>
         </sv:property>
         <sv:property sv:name="jcr:createdBy" sv:type="String">
           <sv:value>admin</sv:value>
@@ -136,7 +136,7 @@ class ArticleController extends Controller
         </sv:property>
         <sv:node sv:name="Faster-than-light">
           <sv:property sv:name="jcr:primaryType" sv:type="Name">
-            <sv:value>slinp:article</sv:value>
+            <sv:value>slinpTest:article</sv:value>
           </sv:property>
           <sv:property sv:name="jcr:createdBy" sv:type="String">
             <sv:value>admin</sv:value>
@@ -150,13 +150,10 @@ class ArticleController extends Controller
           <sv:property sv:name="jcr:lastModified" sv:type="Date">
             <sv:value>2014-05-20T18:21:38.000+00:00</sv:value>
           </sv:property>
-          <sv:property sv:name="format" sv:type="String">
-            <sv:value>plain</sv:value>
-          </sv:property>
           <sv:property sv:name="title" sv:type="String">
             <sv:value>Faster than light</sv:value>
           </sv:property>
-          <sv:property sv:name="text" sv:type="String">
+          <sv:property sv:name="body" sv:type="String">
             <sv:value>Faster-than-light (also superluminal or FTL) communications and travel refer to the propagation of information or matter faster than the speed of light. Under the special theory of relativity, a particle (that has rest mass) with subluminal[1] velocity needs infinite energy to accelerate to the speed of light, although special relativity does not forbid the existence of particles that travel faster than light at all times (tachyons).
 </sv:value>
           </sv:property>

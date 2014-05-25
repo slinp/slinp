@@ -22,16 +22,16 @@ class SlinpMatcherTest extends WebTestCase
     {
         return array(
             // should be the homepage
-            array('/', 'Slinp\SlinpBundle\Controller\ArticleController::showAction'),
+            array('/', 'Slinp\SlinpTestBundle\Controller\ArticleController::showAction'),
 
             // should be an ArticleFolder
-            array('/articles', 'Slinp\SlinpBundle\Controller\ArticleFolderController::indexAction'),
+            array('/articles', 'Slinp\SlinpTestBundle\Controller\ArticleFolderController::showAction'),
 
             // should find this one
-            array('/articles/Faster-than-light', 'Slinp\SlinpBundle\Controller\ArticleController::showAction'),
+            array('/articles/Faster-than-light', 'Slinp\SlinpTestBundle\Controller\ArticleController::showAction'),
 
             // unknown suffix should fall back to first known suffix
-            array('/articles/foobar/barfoo', 'Slinp\SlinpBundle\Controller\ArticleFolderController::indexAction', true),
+            array('/articles/foobar/barfoo', 'Slinp\SlinpTestBundle\Controller\ArticleFolderController::showAction', true),
         );
     }
 

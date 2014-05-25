@@ -1,7 +1,8 @@
-{% extends slinp_layout(node) %}
+{% extends "::layout.html.twig" %}
 {% block content %}
 <article>
     <h2>{{ node.propertyValue('title') }}</h2>
-    {{ node.propertyValue('text') }}
+    {{ node.propertyValue('body') }}
 </article>
 {% endblock %}
+

@@ -1,19 +1,20 @@
 <?php
 
-namespace Slinp\SlinpBundle\Controller;
+namespace Slinp\SlinpTestBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Slinp\SlinpBundle\Annotation\Route;
 
-class ArticleController extends Controller
+class ArticleFolderController extends Controller
 {
     /**
      * @Route(pattern="/")
      */
     public function showAction($node)
     {
-        return $this->render('SlinpBundle:Article:show.html.twig', array(
+        return $this->render('SlinpTestBundle:ArticleFolder:show.html.twig', array(
             'node' => $node
         ));
     }
 }
+

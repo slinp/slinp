@@ -2,7 +2,7 @@ jcr:primaryType:
     value: slinpTest:article
 title: 
     value: This is the Foobar page.
-text:
+body:
     value: |
         The foobar page is real important.
 
