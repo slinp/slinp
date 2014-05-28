@@ -1,0 +1,5 @@
+cmf_routing:
+    chain:
+        routers_by_id:
+            slinp.routing.router: 200
+            router.default: 100

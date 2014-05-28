@@ -11,6 +11,7 @@
         <parameter key="slinp.routing.loader.annot_class.class">Slinp\SlinpBundle\Routing\SlinpAnnotationLoader</parameter>
         <parameter key="slinp.routing.router.class">Slinp\SlinpBundle\Routing\SlinpRouter</parameter>
         <parameter key="slinp.routing.generator.class">Slinp\SlinpBundle\Routing\SlinpUrlGenerator</parameter>
+        <parameter key="slinp.chain_router.class">Symfony\Cmf\Component\Routing\ChainRouter</parameter>
     </parameters>
 
     <services>
@@ -33,7 +34,7 @@
             <argument>/slinp/web</argument>
         </service>
 
-        <service id="router_listener" class="%router_listener.class%">
+        <service id="slinp.router_listener" class="%router_listener.class%">
             <tag name="kernel.event_subscriber" />
             <tag name="monolog.logger" channel="request" />
             <argument type="service" id="slinp.routing.matcher" />

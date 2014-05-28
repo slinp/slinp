@@ -6,6 +6,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class SlinpRouter implements RouterInterface, RequestMatcherInterface
 {
@@ -28,6 +30,10 @@ class SlinpRouter implements RouterInterface, RequestMatcherInterface
         return $this->matcher->matchRequest($request);
     }
 
+    public function getRouteCollection()
+    {
+    }
+
     public function match($pathinfo)
     {
         throw new \InvalidArgumentException(sprintf(
@@ -37,9 +43,8 @@ class SlinpRouter implements RouterInterface, RequestMatcherInterface
 
     public function setContext(RequestContext $context)
     {
-        throw new \InvalidArgumentException(sprintf(
-            'Context not implemented by Slinp Router'
-        ));
+        // this is not used as we use the RequestMatcher interface, but we are
+        // forced to implement these context methods anyway.
     }
 
     public function getContext()
