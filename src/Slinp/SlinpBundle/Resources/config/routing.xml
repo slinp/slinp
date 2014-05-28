@@ -9,15 +9,16 @@
 
         <parameter key="slinp.routing.loader.annot_file.class">Symfony\Component\Routing\Loader\AnnotationFileLoader</parameter>
         <parameter key="slinp.routing.loader.annot_class.class">Slinp\SlinpBundle\Routing\SlinpAnnotationLoader</parameter>
+        <parameter key="slinp.routing.router.class">Slinp\SlinpBundle\Routing\SlinpRouter</parameter>
+        <parameter key="slinp.routing.generator.class">Slinp\SlinpBundle\Routing\SlinpUrlGenerator</parameter>
     </parameters>
 
     <services>
-        <service id="clinp.chain_router" class="%slinp.routing.chain_router.class%">
-        </service>
 
         <service id="slinp.routing.router" class="%slinp.routing.router.class%">
             <argument type="service" id="slinp.routing.matcher"/>
             <argument type="service" id="slinp.routing.generator"/>
+            <tag name="router"/>
         </service>
 
         <service id="slinp.routing.matcher" class="%slinp.routing.matcher.class%">
