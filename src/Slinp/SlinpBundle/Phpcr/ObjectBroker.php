@@ -16,6 +16,7 @@ class ObjectBroker
 
     public function objectForNode(NodeInterface $node)
     {
+        $objectClass = null;
         $nodeType = $node->getPrimaryNodeType();
         $ntNames = $nodeType->getSupertypeNames();
         array_unshift($ntNames, $nodeType->getName());
@@ -31,7 +32,7 @@ class ObjectBroker
             throw new \InvalidArgumentException(sprintf(
                 'There is no object mapping for node type "%s", or any of its super-types (%s) the following node types are mapped: %s',
                 $ntName,
-                implode(', ', array_keys($node->getSupertypeNames())),
+                implode(', ', array_keys($nodeType->getSupertypeNames())),
                 implode(', ', array_keys($this->ntObjectMap))
             ));
         }
