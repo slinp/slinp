@@ -26,6 +26,7 @@ class SlinpExtension extends Extension
         $loader->load('routing.xml');
         $loader->load('content.xml');
         $loader->load('slinp.xml');
+        $loader->load('util.xml');
     }
 
     public function getName()

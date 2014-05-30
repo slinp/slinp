@@ -10,7 +10,7 @@
 
     <services>
 
-        <service id="slinp.util.node_type_name_translator">
+        <service id="slinp.util.node_type_name_translator" class="Slinp\SlinpBundle\Util\NodeTypeNameTranslator">
             <argument type="service" id="kernel" />
         </service>
 

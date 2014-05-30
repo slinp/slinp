@@ -4,6 +4,7 @@ namespace Slinp\SlinpBundle\Routing;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RequestContext;
+use Slinp\SlinpBundle\SlinpObject\Resource;
 
 class SlinpUrlGenerator implements UrlGeneratorInterface
 {
@@ -22,7 +23,7 @@ class SlinpUrlGenerator implements UrlGeneratorInterface
 
     public function generate($name, $parameters = array(), $referenceType = self::ABSOLUTE_PATH)
     {
-        if ($name instanceof SlinpResource) {
+        if ($name instanceof Resource) {
 
         }
     }

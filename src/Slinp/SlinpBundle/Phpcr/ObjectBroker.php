@@ -6,6 +6,15 @@ use PHPCR\NodeInterface;
 use Slinp\SlinpBundle\Phpcr\SlinpObjectInterface;
 use Slinp\SlinpBundle\Util\NodeTypeNameTranslator;
 
+/**
+ * This class will attempt to automatically find a SlinpObject for
+ * a given PHPCR node. It does this based on the node type.
+ *
+ * The node type namespace is translated as the bundle name, and the
+ * node type name as the SlinpObject name.
+ *
+ * @author Daniel Leech <daniel@dantleech.com>
+ */
 class ObjectBroker
 {
     protected $nodeTypeNameTranslator;

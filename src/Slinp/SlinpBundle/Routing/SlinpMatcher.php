@@ -73,6 +73,7 @@ class SlinpMatcher implements RequestMatcherInterface
         while (!$node) {
             try {
                 $node = $session->getNode($nodePath);
+                $phpcrNode = $node->getPhpcrNode();
                 $this->logger->debug('YES: Path found : ' . $nodePath);
             } catch (PathNotFoundException $e) {
                 $this->logger->debug('NO: Path not found : ' . $nodePath);
@@ -80,7 +81,7 @@ class SlinpMatcher implements RequestMatcherInterface
             }
         }
 
-        $nodeType = $node->getPrimaryNodeType();
+        $nodeType = $phpcrNode->getPrimaryNodeType();
         $nodeTypeName = $nodeType->getName();
 
         if (!in_array('slinp:resource', $nodeType->getSupertypeNames())) {
@@ -97,7 +98,7 @@ class SlinpMatcher implements RequestMatcherInterface
         // ======== ADD NODE PREFIX TO ROUTES
 
         $routes = $this->loader->load($controllerFilename);
-        $prefix = substr($node->getPath(), strlen($basePath));
+        $prefix = substr($phpcrNode->getPath(), strlen($basePath));
         $routes->addPrefix($prefix);
 
         foreach ($routes as $route) {
@@ -114,7 +115,7 @@ class SlinpMatcher implements RequestMatcherInterface
         $requestContext->fromRequest($request);
         $routeMatcher = new UrlMatcher($routes, $requestContext);
         $params = $routeMatcher->match($pathInfo);
-        $params['node'] = $node;
+        $params['resource'] = $node;
 
         return $params;
     }

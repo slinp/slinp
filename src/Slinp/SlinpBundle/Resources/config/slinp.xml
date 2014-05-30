@@ -16,12 +16,13 @@
 
         <service id="slinp.phpcr.phpcr_session" factory-service="doctrine_phpcr" factory-method="getConnection" class="PHPCR\SessionInterface"/>
 
-        <service id="slinp.phpcr.object_broker" class="%slinp.phpcr.object_broker.class%"/>
+        <service id="slinp.phpcr.object_broker" class="%slinp.phpcr.object_broker.class%">
+            <argument type="service" id="slinp.util.node_type_name_translator" />
+        </service>
 
         <service id="slinp.session" class="%slinp.session.class%">
             <argument type="service" id="slinp.phpcr.phpcr_session"/>
             <argument type="service" id="slinp.phpcr.object_broker"/>
-            <tag name="router"/>
         </service>
 
     </services>

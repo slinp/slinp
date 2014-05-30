@@ -19,7 +19,8 @@ class NodeLoaderYamlSpec extends ObjectBehavior
     {
         $fixture = __DIR__ . '/fixtures/node.yml';
 
-        $node->setProperty('property1', 'barfoo', 1)->shouldBeCalled();
-        $this->load($node, $fixture);
+        $res = $this->load($fixture)->shouldReturn(array(
+            'property1' => 'barfoo',
+        ));
     }
 }

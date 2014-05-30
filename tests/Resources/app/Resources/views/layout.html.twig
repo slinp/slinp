@@ -1,9 +1,34 @@
 <html>
-<head>
-<title>Slinp Test Website</title>
-</head>
-<body>
-{% block content %}
-{% endblock %}
-</body>
+    <head>
+        <title>Slinp Test Website</title>
+        <style>
+            body {
+                background-color: #111;
+            }
+            .container {
+                margin: auto;
+                width: 800px;
+                background-color: #444;
+                padding: 1em;
+            }
+
+            .header {
+                color: #ffaa00;
+            }
+            .content {
+                background-color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Slinp PHPCR Web Application Framework</h1>
+            </div>
+            <div class="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
 </html>

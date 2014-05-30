@@ -3,11 +3,8 @@
 namespace Slinp\SlinpTestBundle\SlinpObject;
 
 use PHPCR\NodeInterface;
-use Slinp\SlinpBundle\Phpcr\SlinpObjectInterface;
+use Slinp\SlinpBundle\SlinpObject\Resource;
 
-class Article implements SlinpObjectInterface
+class Article extends Resource
 {
-    public function __construct(NodeInterface $node)
-    {
-    }
 }

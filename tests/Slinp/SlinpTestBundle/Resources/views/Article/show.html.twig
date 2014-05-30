@@ -1,8 +1,7 @@
 {% extends "::layout.html.twig" %}
 {% block content %}
 <article>
-    <h2>{{ node.propertyValue('title') }}</h2>
-    <p>{{ node.propertyValue('body') }}</p>
+    <h2>{{ node.get('title') }}</h2>
+    <p>{{ node.get('body') }}</p>
 </article>
 {% endblock %}
-
