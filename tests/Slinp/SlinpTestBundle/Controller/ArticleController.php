@@ -10,10 +10,10 @@ class ArticleController extends Controller
     /**
      * @Route(pattern="/")
      */
-    public function showAction($node)
+    public function showAction(SlinpResource $resource)
     {
         return $this->render('SlinpTestBundle:Article:show.html.twig', array(
-            'node' => $node
+            'node' => $resource
         ));
     }
 }

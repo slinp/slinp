@@ -2,7 +2,6 @@
 
 namespace Slinp\SlinpBundle\Routing;
 
-use Doctrine\Bundle\PHPCRBundle\ManagerRegistry;
 use PHPCR\PathNotFoundException;
 use PHPCR\Util\PathHelper;
 use Psr\Log\LoggerInterface;
@@ -13,6 +12,8 @@ use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Slinp\SlinpBundle\Phpcr\SlinpSession;
+use Slinp\SlinpBundle\Util\NodeTypeNameTranslator;
 
 /**
  * Incoming request matcher
@@ -31,30 +32,30 @@ use Symfony\Component\Routing\Matcher\UrlMatcher;
  */
 class SlinpMatcher implements RequestMatcherInterface
 {
-    protected $registry;
+    protected $slinpSession;
     protected $webPath;
     protected $logger;
     protected $loader;
-    protected $kernel;
+    protected $nodeTypeNameTranslator;
 
     public function __construct(
-        ManagerRegistry $registry, 
+        SlinpSession $slinpSession, 
         $webPath, 
         AnnotationFileLoader $loader, 
-        KernelInterface $kernel,
+        NodeTypeNameTranslator $nodeTypeNameTranslator,
         LoggerInterface $logger
     )
     {
-        $this->registry = $registry;
+        $this->slinpSession = $slinpSession;
         $this->webPath = $webPath;
         $this->loader = $loader;
         $this->logger = $logger;
-        $this->kernel = $kernel;
+        $this->nodeTypeNameTranslator = $nodeTypeNameTranslator;
     }
 
     public function matchRequest(Request $request)
     {
-        $session = $this->registry->getConnection();
+        $session = $this->slinpSession;
 
         $pathInfo = $request->getPathInfo();
 
@@ -91,17 +92,7 @@ class SlinpMatcher implements RequestMatcherInterface
 
         // ======== DETERMINE THE CONTROLLER AND LOAD ROUTES
 
-        $bundleName = ucfirst(strstr($nodeTypeName, ':', true));
-        $controllerName = ucfirst(substr(strstr($nodeTypeName, ':', false), 1));
-
-        $bundle = $this->kernel->getBundle($bundleName . 'Bundle');
-
-        $controllerClass = sprintf('%s\\Controller\\%sController',
-            $bundle->getNamespace(), $controllerName
-        );
-
-        $reflection = new \ReflectionClass($controllerClass);
-        $controllerFilename = $reflection->getFileName();
+        $controllerFilename = $this->nodeTypeNameTranslator->toControllerPath($nodeTypeName);
 
         // ======== ADD NODE PREFIX TO ROUTES
 

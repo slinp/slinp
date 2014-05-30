@@ -8,7 +8,7 @@ use PHPCR\Util\PathHelper;
 use PHPCR\PathNotFoundException;
 use PHPCR\NodeInterface;
 
-class Session implements SessionInterface
+class SlinpSession implements SessionInterface
 {
     protected $session;
     protected $objectBroker;
@@ -86,7 +86,7 @@ class Session implements SessionInterface
 
     public function getNode($path, $depthHint = -1)
     {
-        return $this->getSlinpNodes($this->session->getNode($path));
+        return $this->getSlinpNode($this->session->getNode($path));
     }
 
     public function getNodes($paths)

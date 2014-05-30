@@ -4,14 +4,15 @@ namespace Slinp\SlinpBundle\Phpcr;
 
 use PHPCR\NodeInterface;
 use Slinp\SlinpBundle\Phpcr\SlinpObjectInterface;
+use Slinp\SlinpBundle\Util\NodeTypeNameTranslator;
 
 class ObjectBroker
 {
-    protected $ntObjectMap;
+    protected $nodeTypeNameTranslator;
 
-    public function __construct(array $ntObjectMap = array())
+    public function __construct(NodeTypeNameTranslator $nodeTypeNameTranslator)
     {
-        $this->ntObjectMap = $ntObjectMap;
+        $this->nodeTypeNameTranslator = $nodeTypeNameTranslator;
     }
 
     public function objectForNode(NodeInterface $node)
@@ -21,19 +22,23 @@ class ObjectBroker
         $ntNames = $nodeType->getSupertypeNames();
         array_unshift($ntNames, $nodeType->getName());
 
+        $tried = array();
+
         foreach ($ntNames as $ntName) {
-            if (isset($this->ntObjectMap[$ntName])) {
-                $objectClass = $this->ntObjectMap[$ntName];
+            $objectClass = $this->nodeTypeNameTranslator->toSlinpObject($ntName);
+            $tried[] = $objectClass;
+
+            if (class_exists($objectClass)) {
                 break;
             }
         }
 
-        if (!$objectClass) {
+        if (!class_exists($objectClass)) {
             throw new \InvalidArgumentException(sprintf(
-                'There is no object mapping for node type "%s", or any of its super-types (%s) the following node types are mapped: %s',
+                'Could not find corresponding slinp object class for node type "%s", or any of its super-types (%s). Tried: (%s)',
                 $ntName,
-                implode(', ', array_keys($nodeType->getSupertypeNames())),
-                implode(', ', array_keys($this->ntObjectMap))
+                implode(', ', $ntNames),
+                implode(', ', array_values($tried))
             ));
         }
 
@@ -49,7 +54,7 @@ class ObjectBroker
 
         if (!$object instanceof SlinpObjectInterface) {
             throw new \InvalidArgumentException(sprintf(
-                'Object class "%s" is mapped to node type "%s", but it does not implement the SlinpObjectInterface',
+                'Object class "%s" for node type "%s" exists, but it does not implement the SlinpObjectInterface',
                 $objectClass,
                 $ntName
             ));
