@@ -27,6 +27,7 @@ class SlinpExtension extends Extension
         $loader->load('content.xml');
         $loader->load('slinp.xml');
         $loader->load('util.xml');
+        $loader->load('twig.xml');
     }
 
     public function getName()

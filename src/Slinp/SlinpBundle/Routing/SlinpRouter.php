@@ -8,8 +8,10 @@ use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Cmf\Component\Routing\ChainedRouterInterface;
+use Slinp\SlinpBundle\SlinpObject\Resource;
 
-class SlinpRouter implements RouterInterface, RequestMatcherInterface
+class SlinpRouter implements RouterInterface, RequestMatcherInterface, ChainedRouterInterface
 {
     protected $matcher;
     protected $generator;
@@ -18,6 +20,16 @@ class SlinpRouter implements RouterInterface, RequestMatcherInterface
     {
         $this->matcher = $matcher;
         $this->generator = $generator;
+    }
+
+    public function supports($name)
+    {
+        return $name instanceof Resource;
+    }
+
+    public function getRouteDebugMessage($name, array $params = array())
+    {
+        return 'Article of type ' . get_class($name);
     }
 
     public function generate($name, $parameters = array(), $referenceType = self::ABSOLUTE_PATH)

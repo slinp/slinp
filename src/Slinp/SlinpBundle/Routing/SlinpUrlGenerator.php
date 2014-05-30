@@ -9,6 +9,12 @@ use Slinp\SlinpBundle\SlinpObject\Resource;
 class SlinpUrlGenerator implements UrlGeneratorInterface
 {
     protected $context;
+    protected $webRoot;
+
+    public function __construct($webRoot)
+    {
+        $this->webRoot = $webRoot;
+    }
 
     public function getContext() 
     {
@@ -24,7 +30,12 @@ class SlinpUrlGenerator implements UrlGeneratorInterface
     public function generate($name, $parameters = array(), $referenceType = self::ABSOLUTE_PATH)
     {
         if ($name instanceof Resource) {
+            $path = substr($name->getPath(), strlen($this->webRoot . '/root'));;
+            if (!$path) {
+                $path = '/';
+            }
 
+            return $path;
         }
     }
 }

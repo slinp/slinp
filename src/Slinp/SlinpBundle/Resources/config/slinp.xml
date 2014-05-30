@@ -7,9 +7,7 @@
     <parameters>
         <parameter key="slinp.session.class">Slinp\SlinpBundle\Phpcr\SlinpSession</parameter>
         <parameter key="slinp.phpcr.object_broker.class">Slinp\SlinpBundle\Phpcr\ObjectBroker</parameter>
-        <parameter key="slinp.phpcr.object_broker_mappings" type="collection">
-            <parameter key="nt:resource">Slinp\SlinpBundle\SlinpObject\Resource</parameter>
-        </parameter>
+        <parameter key="slinp.context.class">Slinp\SlinpBundle\Util\SlinpContext</parameter>
     </parameters>
 
     <services>
@@ -23,6 +21,11 @@
         <service id="slinp.session" class="%slinp.session.class%">
             <argument type="service" id="slinp.phpcr.phpcr_session"/>
             <argument type="service" id="slinp.phpcr.object_broker"/>
+        </service>
+
+        <service id="slinp.context" class="%slinp.context.class%">
+            <argument type="service" id="slinp.session" />
+            <argument>/slinp/web</argument>
         </service>
 
     </services>
