@@ -4,8 +4,8 @@ namespace spec\Slinp\SlinpBundle\Util;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Slinp\SlinpBundle\Phpcr\SlinpSession;
-use Slinp\SlinpBundle\Phpcr\SlinpObjectInterface;
+use Slinp\Component\NodeMapper\SlinpSession;
+use Slinp\Component\NodeMapper\SlinpNodeInterface;
 
 class SlinpContextSpec extends ObjectBehavior
 {
@@ -23,7 +23,7 @@ class SlinpContextSpec extends ObjectBehavior
 
     function it_returns_the_web_root_node(
         SlinpSession $session,
-        SlinpObjectInterface $slinpObject
+        SlinpNodeInterface $slinpObject
     )
     {
         $session->getNode('/foo/bar/root')->willReturn($slinpObject);

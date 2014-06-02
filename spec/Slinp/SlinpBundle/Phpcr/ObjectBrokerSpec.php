@@ -6,7 +6,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use PHPCR\NodeInterface;
 use PHPCR\NodeType\NodeTypeInterface;
-use Slinp\SlinpBundle\Util\NodeTypeNameTranslator;
+use Slinp\Bundle\SlinpBundle\Util\NodeTypeNameTranslator;
 
 class ObjectBrokerSpec extends ObjectBehavior
 {

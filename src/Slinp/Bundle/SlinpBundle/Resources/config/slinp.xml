@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="slinp.session.class">Slinp\Component\NodeMapper\SlinpSession</parameter>
+        <parameter key="slinp.phpcr.object_broker.class">Slinp\Component\NodeMapper\ObjectBroker</parameter>
+        <parameter key="slinp.context.class">Slinp\SlinpBundle\Util\SlinpContext</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="slinp.phpcr.phpcr_session" factory-service="doctrine_phpcr" factory-method="getConnection" class="PHPCR\SessionInterface"/>
+
+        <service id="slinp.phpcr.object_broker" class="%slinp.phpcr.object_broker.class%">
+            <argument type="service" id="slinp.util.node_type_name_translator" />
+        </service>
+
+        <service id="slinp.session" class="%slinp.session.class%">
+            <argument type="service" id="slinp.phpcr.phpcr_session"/>
+            <argument type="service" id="slinp.phpcr.object_broker"/>
+        </service>
+
+        <service id="slinp.context" class="%slinp.context.class%">
+            <argument type="service" id="slinp.session" />
+            <argument>/slinp/web</argument>
+        </service>
+
+    </services>
+</container>
+

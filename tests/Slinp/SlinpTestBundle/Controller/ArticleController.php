@@ -3,8 +3,8 @@
 namespace Slinp\SlinpTestBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Slinp\SlinpBundle\Annotation\Route;
-use Slinp\SlinpBundle\SlinpObject\Resource;
+use Slinp\Bundle\SlinpBundle\Annotation\Route;
+use Slinp\Bundle\SlinpBundle\SlinpNode\Resource;
 
 class ArticleController extends Controller
 {

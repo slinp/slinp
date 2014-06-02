@@ -3,7 +3,7 @@
 namespace Slinp\SlinpTestBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Slinp\SlinpBundle\Annotation\Route;
+use Slinp\Bundle\SlinpBundle\Annotation\Route;
 
 class ArticleFolderController extends Controller
 {

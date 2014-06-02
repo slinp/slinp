@@ -3,7 +3,7 @@
 namespace Slinp\SlinpTestBundle\SlinpObject;
 
 use PHPCR\NodeInterface;
-use Slinp\SlinpBundle\SlinpObject\Resource;
+use Slinp\Bundle\SlinpBundle\SlinpNode\Resource;
 
 class Article extends Resource
 {

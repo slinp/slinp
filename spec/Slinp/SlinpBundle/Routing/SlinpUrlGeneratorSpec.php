@@ -4,7 +4,7 @@ namespace spec\Slinp\SlinpBundle\Routing;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Slinp\SlinpBundle\SlinpObject\Resource;
+use Slinp\Bundle\SlinpBundle\SlinpNode\Resource;
 
 class SlinpUrlGeneratorSpec extends ObjectBehavior
 {
