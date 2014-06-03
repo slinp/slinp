@@ -16,10 +16,8 @@ class ObjectBrokerTest extends WebTestCase
         parent::setUp();
         $this->loadFixtures('website.xml');
 
-        $this->broker = new ObjectBroker(array(
-            'slinpTest:article' => 'Slinp\SlinpTestBundle\SlinpObject\Article',
-            'slinp:resource' => 'Slinp\SlinpTestBundle\SlinpObject\Resource',
-        ));
+        $ntNameTranslator = $this->getContainer()->get('slinp.util.node_type_name_translator');
+        $this->broker = new ObjectBroker($ntNameTranslator);
 
         $this->session = $this->getContainer()->get('doctrine_phpcr')->getConnection();
     }

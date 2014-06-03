@@ -7,25 +7,26 @@
     <parameters>
         <parameter key="slinp.session.class">Slinp\Component\NodeMapper\SlinpSession</parameter>
         <parameter key="slinp.phpcr.object_broker.class">Slinp\Component\NodeMapper\ObjectBroker</parameter>
-        <parameter key="slinp.context.class">Slinp\SlinpBundle\Util\SlinpContext</parameter>
+        <parameter key="slinp.context.class">Slinp\Bundle\SlinpBundle\Util\SlinpContext</parameter>
+        <parameter key="slinp.util.node_type_name_translator.class">Slinp\Bundle\SlinpBundle\Util\NodeTypeNameTranslator</parameter>
     </parameters>
 
     <services>
 
-        <service id="slinp.phpcr.phpcr_session" factory-service="doctrine_phpcr" factory-method="getConnection" class="PHPCR\SessionInterface"/>
-
-        <service id="slinp.phpcr.object_broker" class="%slinp.phpcr.object_broker.class%">
-            <argument type="service" id="slinp.util.node_type_name_translator" />
-        </service>
+        <service id="slinp.phpcr_session" factory-service="doctrine_phpcr" factory-method="getConnection" class="PHPCR\SessionInterface"/>
 
         <service id="slinp.session" class="%slinp.session.class%">
-            <argument type="service" id="slinp.phpcr.phpcr_session"/>
-            <argument type="service" id="slinp.phpcr.object_broker"/>
+            <argument type="service" id="slinp.phpcr_session"/>
+            <argument type="service" id="slinp.node_mapper.object_broker"/>
         </service>
 
         <service id="slinp.context" class="%slinp.context.class%">
             <argument type="service" id="slinp.session" />
             <argument>/slinp/web</argument>
+        </service>
+
+        <service id="slinp.util.node_type_name_translator" class="%slinp.util.node_type_name_translator.class%">
+            <argument type="service" id="kernel" />
         </service>
 
     </services>

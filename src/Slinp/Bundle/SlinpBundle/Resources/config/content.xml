@@ -6,18 +6,18 @@
 
     <parameters>
         <parameter key="slinp.content_loader.class">Slinp\Component\ContentLoader\ContentLoader</parameter>
-        <parameter key="slinp.content_loader.factory.class">Slinp\Component\ContentLoader\ContentLoader</parameter>
+        <parameter key="slinp.content_loader.factory.class">Slinp\Component\ContentLoader\NodeLoaderFactory</parameter>
 
     </parameters>
 
     <services>
         <service
             id="slinp.content_loader.factory"
-            class="Slinp\SlinpBundle\Content\NodeLoaderFactory"
+            class="%slinp.content_loader.factory.class%"
         />
         <service 
             id="slinp.content_loader"
-            class="%slinp.content.content_loader.class%"
+            class="%slinp.content_loader.class%"
             >
             <argument type="service" id="doctrine_phpcr" />
             <argument type="service" id="slinp.content_loader.factory" />

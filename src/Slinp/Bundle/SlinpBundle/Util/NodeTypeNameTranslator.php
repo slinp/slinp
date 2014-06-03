@@ -29,6 +29,7 @@ class NodeTypeNameTranslator
     public function toBundleNamespace($nodeTypeName)
     {
         $bundleName = ucfirst(strstr($nodeTypeName, ':', true));
+
         $bundle = $this->kernel->getBundle($bundleName . 'Bundle');
 
         return $bundle->getNamespace();

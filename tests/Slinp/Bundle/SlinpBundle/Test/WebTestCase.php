@@ -38,7 +38,7 @@ abstract class WebTestCase extends BaseWebTestCase
 
     public function loadFixtures($filename)
     {
-        $fixturePath = __DIR__ . '/../../../Resources/fixtures/' . $filename;
+        $fixturePath = __DIR__ . '/../../../../Resources/fixtures/' . $filename;
 
         if (!file_exists($fixturePath)) {
             throw new \InvalidArgumentException('Fixture file ' . $fixturePath . ' does not exist.');

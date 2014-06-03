@@ -16,7 +16,7 @@ class ContentLoaderTest extends WebTestCase
 
         $this->loadFixtures('empty.xml');
         $this->kernelRoot = $this->getContainer()->getParameter('kernel.root_dir');
-        $this->contentLoader = $this->getContainer()->get('slinp.content.content_loader');
+        $this->contentLoader = $this->getContainer()->get('slinp.content_loader');
         $this->session = $this->getContainer()->get('doctrine_phpcr')->getConnection();
     }
 
