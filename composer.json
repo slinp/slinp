@@ -1,8 +1,8 @@
 {
-    "name": "dtl/slinp-bundle",
+    "name": "dtl/slinp",
     "license": "MIT",
     "type": "project",
-    "description": "Core Slinp Bundle",
+    "description": "Slinp RAD PHPCR Web Framework",
     "autoload": {
         "psr-0": { 
             "Slinp\\Bundle\\SlinpBundle\\Tests": "tests",
