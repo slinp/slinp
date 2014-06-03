@@ -1,6 +1,6 @@
 <?php
 
-namespace Slinp\SlinpTestBundle;
+namespace Slinp\Bundle\SlinpTestBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

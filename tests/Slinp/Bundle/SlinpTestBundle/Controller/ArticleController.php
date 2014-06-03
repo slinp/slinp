@@ -1,6 +1,6 @@
 <?php
 
-namespace Slinp\SlinpTestBundle\Controller;
+namespace Slinp\Bundle\SlinpTestBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Slinp\Bundle\SlinpBundle\Annotation\Route;

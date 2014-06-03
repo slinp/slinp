@@ -14,7 +14,7 @@ class AppKernel extends TestKernel
         $this->addBundles(array(
             new \Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new \Slinp\Bundle\SlinpBundle\SlinpBundle(),
-            new \Slinp\SlinpTestBundle\SlinpTestBundle(),
+            new \Slinp\Bundle\SlinpTestBundle\SlinpTestBundle(),
         ));
     }
 

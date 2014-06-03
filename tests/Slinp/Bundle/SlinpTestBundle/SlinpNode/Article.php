@@ -1,8 +1,7 @@
 <?php
 
-namespace Slinp\SlinpTestBundle\SlinpObject;
+namespace Slinp\Bundle\SlinpTestBundle\SlinpNode;
 
-use PHPCR\NodeInterface;
 use Slinp\Bundle\SlinpBundle\SlinpNode\Resource;
 
 class Article extends Resource

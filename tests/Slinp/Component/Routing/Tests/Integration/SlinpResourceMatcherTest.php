@@ -1,8 +1,9 @@
 <?php
 
-namespace Slinp\SlinpBundle\Tests\Integration\Routing;
+namespace Slinp\Component\Routing\Tests\Integration;
 
 use Slinp\Component\Routing\SlinpMatcher;
+use Slinp\SlinpBundle\Tests\Integration\Routing\Symfony;
 use Symfony\Component\HttpFoundation\Request;
 use Slinp\Bundle\SlinpBundle\Test\WebTestCase;
 

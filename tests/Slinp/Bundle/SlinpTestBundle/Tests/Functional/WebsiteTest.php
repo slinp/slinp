@@ -1,6 +1,6 @@
 <?php
 
-namespace Slinp\SlinpBundle\Tests\Functional;
+namespace Slinp\Bundle\SlinpTestBundle\Tests\Functional;
 
 use Slinp\Bundle\SlinpBundle\Test\WebTestCase;
 

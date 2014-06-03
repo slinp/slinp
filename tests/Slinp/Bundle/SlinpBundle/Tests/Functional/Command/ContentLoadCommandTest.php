@@ -1,6 +1,6 @@
 <?php
 
-namespace Slinp\SlinpBundle\Tests\Functional\Command;
+namespace Slinp\Bundle\SlinpBundle\Tests\Functional\Command;
 
 use Slinp\Bundle\SlinpBundle\Test\WebTestCase;
 use Slinp\Bundle\SlinpBundle\Test\CommandTestCase;

@@ -1,8 +1,7 @@
 <?php
 
-namespace Slinp\SlinpBundle\Tests\Integration\Routing;
+namespace Slinp\Component\NodeMapper\Tests\Integration;
 
-use Slinp\Component\Routing\SlinpMatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Slinp\Bundle\SlinpBundle\Test\WebTestCase;
 use Slinp\Component\NodeMapper\ObjectBroker;
