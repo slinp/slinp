@@ -5,7 +5,10 @@ Status](https://travis-ci.org/dantleech/slinp.svg?branch=master)](https://travis
 
 **WARNING**: This is under heavy development!
 
-Slinp is a Web Content Framework based on Symfony and PHPCR.
+Slinp is a RAD (Rapid Application Development) Web Framework for PHPCR, using Symfony. It
+shares similar ideas with the Apache Sling project.
+
+One of the goals of Slinp is to have *zero* configuration.
 
 Slinp **maps incoming requests** to a path in the PHPCR content repository.  The
 **node type** of the resource (i.e. node) at the path is then used to determine
