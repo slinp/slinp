@@ -10,6 +10,8 @@ shares similar ideas with the Apache Sling project.
 
 One of the goals of Slinp is to have *zero* configuration.
 
+## Routing
+
 Slinp **maps incoming requests** to a path in the PHPCR content repository.  The
 **node type** of the resource (i.e. node) at the path is then used to determine
 which controller to use.
@@ -51,6 +53,39 @@ class ArticleController extends Controller
     {
         // process some editing
         return $this->render('SlinpBundle:Article:edit', $node);
+    }
+}
+````
+
+## Node Mapping
+
+Slinp wraps the PHPCR session to enable user defined classes to represent
+PHPCR nodes, as with the routing, the path of the user object is inferred from
+the node type name, so a PHPCR node with type "mycms:article" will resolve to:
+
+    Namespace\Of\MyCmsBundle\SlinpNode\SlinpNode\Article
+
+If the `Article` class does not exist at that location, it will fallback to
+finding a class based on the parent node type and if all else fails a standard
+object will be used.
+
+The article is a simple class which must implement the `SlinpNodeInterface`,
+which forces the class to accept a PHPCR `NodeInterface` as an argument and
+provide a getter for it.
+
+````php
+class Article implements SlinpNodeInterface
+{
+    protected $phpcrNode;
+
+    public function __construct(NodeInterface $phpcrNode)
+    {
+        $this->phpcrNode = $phpcrNode;
+    }
+
+    public function getPhpcrNode() 
+    {
+        return $this->phpcrNode;
     }
 }
 ````
