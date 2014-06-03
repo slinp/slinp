@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Slinp\SlinpBundle\Content;
+namespace spec\Slinp\Component\ContentLoader;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -10,7 +10,7 @@ class NodeLoaderYamlSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Slinp\SlinpBundle\Content\NodeLoaderYaml');
+        $this->shouldHaveType('Slinp\Component\ContentLoader\NodeLoaderYaml');
     }
 
     function it_should_load_the_given_node_with_data_from_yaml_file(

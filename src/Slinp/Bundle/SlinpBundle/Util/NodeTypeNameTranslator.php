@@ -55,16 +55,16 @@ class NodeTypeNameTranslator
     }
 
     /**
-     * Translate to a SlinpObject class name
+     * Translate to a SlinpNode class name
      *
      * @param string $nodeTypeName
      *
      * @return string
      */
-    public function toSlinpObject($nodeTypeName)
+    public function toSlinpNode($nodeTypeName)
     {
         $objectName = ucfirst(substr(strstr($nodeTypeName, ':', false), 1));
-        $objectClass = sprintf('%s\\SlinpObject\\%s',
+        $objectClass = sprintf('%s\\SlinpNode\\%s',
             $this->toBundleNamespace($nodeTypeName), $objectName
         );
 

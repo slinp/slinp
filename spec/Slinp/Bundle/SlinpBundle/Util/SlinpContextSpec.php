@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Slinp\SlinpBundle\Util;
+namespace spec\Slinp\Bundle\SlinpBundle\Util;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -11,7 +11,7 @@ class SlinpContextSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Slinp\SlinpBundle\Util\SlinpContext');
+        $this->shouldHaveType('Slinp\Bundle\SlinpBundle\Util\SlinpContext');
     }
 
     function let(

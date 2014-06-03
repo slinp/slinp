@@ -7,11 +7,11 @@ use Slinp\Component\NodeMapper\SlinpNodeInterface;
 use Slinp\Bundle\SlinpBundle\Util\NodeTypeNameTranslator;
 
 /**
- * This class will attempt to automatically find a SlinpObject for
+ * This class will attempt to automatically find a SlinpNode for
  * a given PHPCR node. It does this based on the node type.
  *
  * The node type namespace is translated as the bundle name, and the
- * node type name as the SlinpObject name.
+ * node type name as the SlinpNode name.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
@@ -24,7 +24,7 @@ class ObjectBroker
         $this->nodeTypeNameTranslator = $nodeTypeNameTranslator;
     }
 
-    public function objectForNode(NodeInterface $node)
+    public function exchange(NodeInterface $node)
     {
         $objectClass = null;
         $nodeType = $node->getPrimaryNodeType();
@@ -34,7 +34,7 @@ class ObjectBroker
         $tried = array();
 
         foreach ($ntNames as $ntName) {
-            $objectClass = $this->nodeTypeNameTranslator->toSlinpObject($ntName);
+            $objectClass = $this->nodeTypeNameTranslator->toSlinpNode($ntName);
             $tried[] = $objectClass;
 
             if (class_exists($objectClass)) {
@@ -63,7 +63,7 @@ class ObjectBroker
 
         if (!$object instanceof SlinpNodeInterface) {
             throw new \InvalidArgumentException(sprintf(
-                'Object class "%s" for node type "%s" exists, but it does not implement the SlinpObjectInterface',
+                'Object class "%s" for node type "%s" exists, but it does not implement the SlinpNodeInterface',
                 $objectClass,
                 $ntName
             ));

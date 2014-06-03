@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Slinp\SlinpBundle\Phpcr;
+namespace spec\Slinp\Component\NodeMapper;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -12,7 +12,7 @@ class ObjectBrokerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Slinp\SlinpBundle\Phpcr\ObjectBroker');
+        $this->shouldHaveType('Slinp\Component\NodeMapper\ObjectBroker');
     }
 
     function let(
@@ -33,11 +33,11 @@ class ObjectBrokerSpec extends ObjectBehavior
         $nodeType->getSupertypeNames()->willReturn(array());
         $nodeType->getName()->willReturn('nt:barbar');
         $node->getPrimaryNodeType()->willReturn($nodeType);
-        $nodeTypeNameTranslator->toSlinpObject('nt:barbar')->willReturn('Foo\\Bar\\SomeObject');
+        $nodeTypeNameTranslator->toSlinpNode('nt:barbar')->willReturn('Foo\\Bar\\SomeObject');
 
         $this->shouldThrow(new \InvalidArgumentException(
             'Could not find corresponding slinp object class for node type "nt:barbar", or any of its super-types (nt:barbar). Tried: (Foo\Bar\SomeObject)'
-        ))->duringObjectForNode($node);
+        ))->duringExchange($node);
     }
 
     function it_will_throw_an_exception_if_the_inferred_object_does_not_implement_the_interface(
@@ -48,13 +48,13 @@ class ObjectBrokerSpec extends ObjectBehavior
     {
         $nodeType->getSupertypeNames()->willReturn(array());
         $nodeType->getName()->willReturn('slinpTest:meDoesNotImplementTheInterface');
-        $nodeTypeNameTranslator->toSlinpObject('slinpTest:meDoesNotImplementTheInterface')->willReturn('Slinp\SlinpTestBundle\SlinpObject\MeDoesNotImplementTheInterface');
+        $nodeTypeNameTranslator->toSlinpNode('slinpTest:meDoesNotImplementTheInterface')->willReturn('Slinp\Bundle\SlinpTestBundle\SlinpNode\MeDoesNotImplementTheInterface');
 
         $node->getPrimaryNodeType()->willReturn($nodeType);
 
         $this->shouldThrow(new \InvalidArgumentException(
-            'Object class "Slinp\SlinpTestBundle\SlinpObject\MeDoesNotImplementTheInterface" for node type "slinpTest:meDoesNotImplementTheInterface" exists, but it does not implement the SlinpObjectInterface'
-        ))->duringObjectForNode($node);
+            'Object class "Slinp\Bundle\SlinpTestBundle\SlinpNode\MeDoesNotImplementTheInterface" for node type "slinpTest:meDoesNotImplementTheInterface" exists, but it does not implement the SlinpNodeInterface'
+        ))->duringExchange($node);
     }
 
     function it_will_return_an_object_for_a_valid_mapped_node_type(
@@ -66,7 +66,7 @@ class ObjectBrokerSpec extends ObjectBehavior
         $nodeType->getSupertypeNames()->willReturn(array('nt:resource'));
         $nodeType->getName()->willReturn('nt:article');
         $node->getPrimaryNodeType()->willReturn($nodeType);
-        $nodeTypeNameTranslator->toSlinpObject('nt:article')->willReturn('Slinp\SlinpTestBundle\SlinpObject\Article');
-        $this->objectForNode($node)->shouldReturnAnInstanceOf('Slinp\SlinpTestBundle\SlinpObject\Article');
+        $nodeTypeNameTranslator->toSlinpNode('nt:article')->willReturn('Slinp\Bundle\SlinpTestBundle\SlinpNode\Article');
+        $this->exchange($node)->shouldReturnAnInstanceOf('Slinp\Bundle\SlinpTestBundle\SlinpNode\Article');
     }
 }

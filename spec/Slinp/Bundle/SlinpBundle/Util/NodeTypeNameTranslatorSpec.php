@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Slinp\SlinpBundle\Util;
+namespace spec\Slinp\Bundle\SlinpBundle\Util;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -11,7 +11,7 @@ class NodeTypeNameTranslatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Slinp\SlinpBundle\Util\NodeTypeNameTranslator');
+        $this->shouldHaveType('Slinp\Bundle\SlinpBundle\Util\NodeTypeNameTranslator');
     }
 
     function let(
@@ -38,9 +38,9 @@ class NodeTypeNameTranslatorSpec extends ObjectBehavior
     )
     {
         $kernel->getBundle('SlinpTestBundle')->willReturn($bundle);
-        $bundle->getNamespace()->willReturn('Slinp\\SlinpTestBundle');
+        $bundle->getNamespace()->willReturn('Slinp\\Bundle\\SlinpTestBundle');
 
-        $this->toControllerPath('slinpTest:article')->shouldMatch('{Slinp/SlinpTestBundle/Controller/ArticleController.php}');
+        $this->toControllerPath('slinpTest:article')->shouldMatch('{Slinp/Bundle/SlinpTestBundle/Controller/ArticleController.php}');
     }
 
     function it_should_translate_to_a_slinp_object(
@@ -49,8 +49,8 @@ class NodeTypeNameTranslatorSpec extends ObjectBehavior
     )
     {
         $kernel->getBundle('SlinpTestBundle')->willReturn($bundle);
-        $bundle->getNamespace()->willReturn('Slinp\\SlinpTestBundle');
+        $bundle->getNamespace()->willReturn('Slinp\\Bundle\\SlinpTestBundle');
 
-        $this->toSlinpObject('slinpTest:article')->shouldReturn('Slinp\SlinpTestBundle\SlinpObject\Article');
+        $this->toSlinpNode('slinpTest:article')->shouldReturn('Slinp\Bundle\SlinpTestBundle\SlinpNode\Article');
     }
 }

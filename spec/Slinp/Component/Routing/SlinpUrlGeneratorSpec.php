@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Slinp\SlinpBundle\Routing;
+namespace spec\Slinp\Component\Routing;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -10,7 +10,7 @@ class SlinpUrlGeneratorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Slinp\SlinpBundle\Routing\SlinpUrlGenerator');
+        $this->shouldHaveType('Slinp\Component\Routing\SlinpUrlGenerator');
     }
 
     function let()
