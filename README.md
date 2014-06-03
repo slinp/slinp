@@ -8,7 +8,9 @@ Status](https://travis-ci.org/dantleech/slinp.svg?branch=master)](https://travis
 Slinp is a RAD (Rapid Application Development) Web Framework for PHPCR, using Symfony. It
 shares similar ideas with the Apache Sling project.
 
-One of the goals of Slinp is to have *zero* configuration.
+One of the goals of Slinp is to have *zero* configuration by default. It will achieve
+this by expecting classes to be defined in specific locations and falling back
+as necessary if they do not exist.
 
 ## Routing
 
