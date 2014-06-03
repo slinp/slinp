@@ -21,11 +21,12 @@
         "doctrine/phpcr-bundle": "dev-master",
         "jackalope/jackalope-doctrine-dbal": "dev-master",
         "phpcr/phpcr-utils": "dev-master",
-        "symfony-cmf/routing-bundle": "1.2.0"
+        "symfony-cmf/routing-bundle": "1.2.0",
+        "symfony/monolog-bundle": "~2.4"
     },
+    "minimum-stability": "dev",
     "require-dev": {
-        "phpspec/phpspec": "2.1.x-dev",
-        "symfony-cmf/testing": "1.1.*"
+        "phpspec/phpspec": "2.1.x-dev"
     }
 }
 
