@@ -20,7 +20,7 @@ class ContentLoadCommandTest extends CommandTestCase
         $output = $tester->getDisplay();
         $this->assertEquals(0, $tester->getStatusCode());
         $this->assertContains(<<<EOT
-Loading: /home/daniel/www/slinp/slinp/tests/Resources/app/content/node.yml
+slinp/tests/Resources/app/content/node.yml
 EOT
         , $tester->getDisplay());
 
