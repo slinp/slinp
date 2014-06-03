@@ -25,7 +25,7 @@ class ObjectBrokerTest extends WebTestCase
     public function testBroker()
     {
         $node = $this->session->getNode('/slinp/web/root/articles/Faster-than-light');
-        $this->broker->objectForNode($node);
+        $this->broker->exchange($node);
     }
 }
 

@@ -10,7 +10,7 @@ class SlinpAnnotationLoader extends AnnotationClassLoader
 {
     public function __construct(Reader $reader)
     {
-        $this->setRouteAnnotationClass('Slinp\SlinpBundle\Annotation\Route');
+        $this->setRouteAnnotationClass('Slinp\Bundle\SlinpBundle\Annotation\Route');
         parent::__construct($reader);
     }
 

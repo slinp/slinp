@@ -32,7 +32,7 @@ class SlinpSession implements SessionInterface
 
     protected function getSlinpNode(NodeInterface $phpcrNode)
     {
-        return $this->objectBroker->objectForNode($phpcrNode);
+        return $this->objectBroker->exchange($phpcrNode);
     }
 
     public function getRepository()
