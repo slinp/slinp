@@ -92,6 +92,11 @@ class Article implements SlinpNodeInterface
 }
 ````
 
+## Components
+
+Slinp components work with plain PHPCR - so you can use the NodeMapper,
+Routing or ContentLoader components outside of the context of Slinp.
+
 ## What is a Slinp?
 
 I had been thinking about node-type based routing for some time I think, and
@@ -110,7 +115,7 @@ projects. So I put the "P" at the end instead. Clever no?
 - **Node type based routing** -- Slinp is content-centric. You can put your
   content where you want and it will always be rendered by the same
   controller. The ability to add routes to resources via. annotations makes
-  Slinp web application friendly.
+  Slinp web application friendly..
 - **Schematic CMS design** -- You can define your content the way you want
   using PHPCRs node types -- be as strict or as loose as you like! Also you can
   create automatically created nodes and properties.
