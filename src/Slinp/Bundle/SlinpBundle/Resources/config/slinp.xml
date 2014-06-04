@@ -29,6 +29,11 @@
             <argument type="service" id="kernel" />
         </service>
 
+        <service id="slinp.listener.controller" class="Slinp\Bundle\SlinpBundle\Listener\ControllerListener">
+            <argument type="service" id="slinp.node_mapper.object_broker"/>
+            <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController" />
+        </service>
+
     </services>
 </container>
 

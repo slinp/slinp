@@ -22,7 +22,7 @@
         </service>
 
         <service id="slinp.routing.matcher" class="%slinp.routing.matcher.class%">
-            <argument type="service" id="slinp.session" />
+            <argument type="service" id="slinp.phpcr_session" />
             <argument>/slinp/web</argument>
             <argument type="service" id="slinp.routing.loader.annot_file" />
             <argument type="service" id="slinp.util.node_type_name_translator" />

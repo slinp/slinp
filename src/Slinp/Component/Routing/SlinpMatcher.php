@@ -12,8 +12,8 @@ use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
-use Slinp\Component\NodeMapper\SlinpSession;
 use Slinp\Bundle\SlinpBundle\Util\NodeTypeNameTranslator;
+use PHPCR\SessionInterface;
 
 /**
  * Incoming request matcher
@@ -32,21 +32,21 @@ use Slinp\Bundle\SlinpBundle\Util\NodeTypeNameTranslator;
  */
 class SlinpMatcher implements RequestMatcherInterface
 {
-    protected $slinpSession;
+    protected $phpcrSession;
     protected $webPath;
     protected $logger;
     protected $loader;
     protected $nodeTypeNameTranslator;
 
     public function __construct(
-        SlinpSession $slinpSession, 
+        SessionInterface $phpcrSession, 
         $webPath, 
         AnnotationFileLoader $loader, 
         NodeTypeNameTranslator $nodeTypeNameTranslator,
         LoggerInterface $logger
     )
     {
-        $this->slinpSession = $slinpSession;
+        $this->phpcrSession = $phpcrSession;
         $this->webPath = $webPath;
         $this->loader = $loader;
         $this->logger = $logger;
@@ -55,7 +55,7 @@ class SlinpMatcher implements RequestMatcherInterface
 
     public function matchRequest(Request $request)
     {
-        $session = $this->slinpSession;
+        $session = $this->phpcrSession;
 
         $pathInfo = $request->getPathInfo();
 
@@ -73,7 +73,6 @@ class SlinpMatcher implements RequestMatcherInterface
         while (!$node) {
             try {
                 $node = $session->getNode($nodePath);
-                $phpcrNode = $node->getPhpcrNode();
                 $this->logger->debug('YES: Path found : ' . $nodePath);
             } catch (PathNotFoundException $e) {
                 $this->logger->debug('NO: Path not found : ' . $nodePath);
@@ -81,7 +80,7 @@ class SlinpMatcher implements RequestMatcherInterface
             }
         }
 
-        $nodeType = $phpcrNode->getPrimaryNodeType();
+        $nodeType = $node->getPrimaryNodeType();
         $nodeTypeName = $nodeType->getName();
 
         if (!in_array('slinp:resource', $nodeType->getSupertypeNames())) {
@@ -98,7 +97,7 @@ class SlinpMatcher implements RequestMatcherInterface
         // ======== ADD NODE PREFIX TO ROUTES
 
         $routes = $this->loader->load($controllerFilename);
-        $prefix = substr($phpcrNode->getPath(), strlen($basePath));
+        $prefix = substr($node->getPath(), strlen($basePath));
         $routes->addPrefix($prefix);
 
         foreach ($routes as $route) {
@@ -115,7 +114,7 @@ class SlinpMatcher implements RequestMatcherInterface
         $requestContext->fromRequest($request);
         $routeMatcher = new UrlMatcher($routes, $requestContext);
         $params = $routeMatcher->match($pathInfo);
-        $params['resource'] = $node;
+        $params['node'] = $node;
 
         return $params;
     }

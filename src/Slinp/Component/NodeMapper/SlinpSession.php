@@ -9,6 +9,13 @@ use PHPCR\PathNotFoundException;
 use PHPCR\NodeInterface;
 use Slinp\Component\NodeMapper\ObjectBroker;
 
+/**
+ * The slinp session wraps the PHPCR session and
+ * uses the ObjectBroker to return node type specific
+ * objects if they exist.
+ *
+ * @author Daniel Leech <daniel@dantleech.com>
+ */
 class SlinpSession implements SessionInterface
 {
     protected $session;
