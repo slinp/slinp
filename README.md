@@ -97,6 +97,7 @@ class Article implements SlinpNodeInterface
 Slinp components work with plain PHPCR - so you can use the NodeMapper,
 Routing or ContentLoader components outside of the context of Slinp.
 
+
 ## What is a Slinp?
 
 I had been thinking about node-type based routing for some time I think, and
