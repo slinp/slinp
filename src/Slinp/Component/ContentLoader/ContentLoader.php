@@ -8,7 +8,7 @@ use Doctrine\Bundle\PHPCRBundle\ManagerRegistry;
 use PHPCR\PathNotFoundException;
 use PHPCR\Util\PathHelper;
 use Slinp\Component\ContentLoader\NodeLoaderFactory;
-use Slinp\SlinpBundle\Content\PropertyType;
+use PHPCR\PropertyType;
 
 class ContentLoader
 {
@@ -75,6 +75,7 @@ class ContentLoader
         }
 
         $primaryType = $data['jcr:primaryType']['value'];
+
         unset($data['jcr:primaryType']);
 
         try {
