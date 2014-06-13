@@ -6,6 +6,15 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RequestContext;
 use Slinp\Bundle\SlinpBundle\SlinpNode\Resource;
 
+/**
+ * URL generator for Slinp Resource nodes.
+ *
+ * NOTE: This is pretty dumb at the moment and only returns
+ *       the web path of the resource, it does not support
+ *       any additional routes that may be defined in the controller.
+ *
+ * @author Daniel Leech <daniel@dantleech.com>
+ */
 class SlinpUrlGenerator implements UrlGeneratorInterface
 {
     protected $context;

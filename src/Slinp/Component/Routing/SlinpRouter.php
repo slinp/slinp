@@ -11,6 +11,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Cmf\Component\Routing\ChainedRouterInterface;
 use Slinp\Bundle\SlinpBundle\SlinpNode\Resource;
 
+/**
+ * Router object which combines the RequestMatcher and
+ * the UrlGenerator for use with the CMF chain router.
+ *
+ * @author Daniel Leech <daniel@dantleech.com>
+ */
 class SlinpRouter implements RouterInterface, RequestMatcherInterface, ChainedRouterInterface
 {
     protected $matcher;
