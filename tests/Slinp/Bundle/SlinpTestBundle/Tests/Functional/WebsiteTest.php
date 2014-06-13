@@ -21,4 +21,14 @@ class WebsiteTest extends WebTestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertContains('Slinp Web Content Framework', $response->getContent());
     }
+
+    public function testDefaultControllerPage()
+    {
+        $client = $this->createClient();
+        $client->request('GET', '/nocontroller');
+        $response = $client->getResponse();
+
+        $this->assertEquals(404, $response->getStatusCode());
+        $this->assertContains('404 Resource: nocontroller', $response->getContent());
+    }
 }
