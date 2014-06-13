@@ -21,7 +21,7 @@ interface SlinpNodeInterface
      * @param NodeInterface $node
      * @param ObjectBroker $objectBroker
      */
-    public function __construct(NodeInterface $node, ObjectBroker $objectBroker);
+    public function __construct(NodeInterface $node);
 
     /**
      * Return the underlying PHPCR node
