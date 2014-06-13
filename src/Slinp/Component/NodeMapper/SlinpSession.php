@@ -221,4 +221,11 @@ class SlinpSession implements SessionInterface
     {
         return $this->session->getRetentionManager();
     }
+
+    public function executeQuery($jcrSql2)
+    {
+        $res = $this->getWorkspace()->getQueryManager()->createQuery($jcrSql2, 'JCR-SQL2')->execute();
+
+        return $this->objectBroker->exchangeCollection($res->getNodes());
+    }
 }

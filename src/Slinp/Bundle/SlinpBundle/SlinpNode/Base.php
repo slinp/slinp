@@ -4,53 +4,57 @@ namespace Slinp\Bundle\SlinpBundle\SlinpNode;
 
 use Slinp\Component\NodeMapper\SlinpNodeInterface;
 use PHPCR\NodeInterface;
+use Slinp\Component\NodeMapper\ObjectBroker;
 
 class Base implements SlinpNodeInterface
 {
-    protected $phpcrNode;
+    private $phpcrNode;
+    private $objectBroker;
 
-    public function __construct(NodeInterface $phpcrNode)
+    public function __construct(NodeInterface $phpcrNode, ObjectBroker $objectBroker)
     {
         $this->phpcrNode = $phpcrNode;
+        $this->objectBroker = $objectBroker;
     }
 
-    public function getPhpcrNode() 
+    /**
+     * {@inheritDoc}
+     */
+    public function _node() 
     {
         return $this->phpcrNode;
     }
 
-    public function get($property)
+    /**
+     * {@inheritDoc}
+     */
+    public function _objectBroker()
     {
-        return $this->getPhpcrNode()->getPropertyValue($property);
+        return $this->objectBroker;
     }
 
     /**
-     * @see NodeInterface::getNodes
+     * Return the children of this node, optionally you
+     * can specify a node type filter
+     *
+     * @return SlinpNodeInterface[]
      */
-    public function getNodes()
+    public function _children($nodeTypeFilter = null)
     {
-        $nodes = array();
-        $thisClass = get_class($this);
-        foreach ($this->phpcrNode->getNodes() as $child) {
-            $nodes[] = new $thisClass($child);
+        return $this->_objectBroker()->exchangeCollection($this->_node()->getNodes(null, $nodeTypeFilter));
+    }
+
+    /**
+     * Return the named property value
+     *
+     * @return mixed
+     */
+    public function _value($name)
+    {
+        if ($this->_node()->hasProperty($name)) {
+            return $this->getPhpcrNode()->getPropertyValue($name);
         }
 
-        return $nodes;
-    }
-
-    /**
-     * @see NodeInterface::getName
-     */
-    public function getName()
-    {
-        return $this->phpcrNode->getName();
-    }
-
-    /**
-     * @see NodeInterface::getPath
-     */
-    public function getPath()
-    {
-        return $this->phpcrNode->getPath();
+        return null;
     }
 }

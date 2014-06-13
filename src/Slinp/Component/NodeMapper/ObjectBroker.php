@@ -24,6 +24,16 @@ class ObjectBroker
         $this->nodeTypeNameTranslator = $nodeTypeNameTranslator;
     }
 
+    public function exchangeCollection($nodes)
+    {
+        $ret = array();
+        foreach ($nodes as $node) {
+            $ret[] = $this->exchange($node);
+        }
+
+        return $ret;
+    }
+
     public function exchange(NodeInterface $node)
     {
         $objectClass = null;
@@ -43,12 +53,7 @@ class ObjectBroker
         }
 
         if (!class_exists($objectClass)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Could not find corresponding slinp object class for node type "%s", or any of its super-types (%s). Tried: (%s)',
-                $ntName,
-                implode(', ', $ntNames),
-                implode(', ', array_values($tried))
-            ));
+            $objectClass = 'Slinp\Bundle\SlinpBundle\SlinpNode\Base';
         }
 
         if (!class_exists($objectClass)) {
@@ -59,7 +64,7 @@ class ObjectBroker
             ));
         }
 
-        $object = new $objectClass($node);
+        $object = new $objectClass($node, $this);
 
         if (!$object instanceof SlinpNodeInterface) {
             throw new \InvalidArgumentException(sprintf(

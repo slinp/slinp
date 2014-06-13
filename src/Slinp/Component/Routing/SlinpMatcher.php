@@ -124,7 +124,7 @@ class SlinpMatcher implements RequestMatcherInterface
         $requestContext->fromRequest($request);
         $routeMatcher = new UrlMatcher($routes, $requestContext);
         $params = $routeMatcher->match($pathInfo);
-        $params['node'] = $node;
+        $params['_node'] = $node;
 
         return $params;
     }
