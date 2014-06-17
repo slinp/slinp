@@ -28,5 +28,5 @@ interface SlinpNodeInterface
      *
      * @return PHPCR\NodeInterface
      */
-    public function _node();
+    public function node();
 }

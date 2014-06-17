@@ -27,7 +27,7 @@ class Base implements SlinpNodeInterface
     /**
      * {@inheritDoc}
      */
-    public function _node() 
+    public function node() 
     {
         return $this->phpcrNode;
     }

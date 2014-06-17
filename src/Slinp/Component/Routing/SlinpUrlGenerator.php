@@ -38,7 +38,7 @@ class SlinpUrlGenerator implements UrlGeneratorInterface
     public function generate($name, $parameters = array(), $referenceType = self::ABSOLUTE_PATH)
     {
         if ($name instanceof Resource) {
-            $path = substr($name->_node()->getPath(), strlen($this->webRoot . '/root'));;
+            $path = substr($name->node()->getPath(), strlen($this->webRoot . '/root'));
             if (!$path) {
                 $path = '/';
             }

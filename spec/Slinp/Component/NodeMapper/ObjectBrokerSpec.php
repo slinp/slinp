@@ -20,7 +20,8 @@ class ObjectBrokerSpec extends ObjectBehavior
     )
     {
         $this->beConstructedWith(
-            $nodeTypeNameTranslator
+            $nodeTypeNameTranslator,
+            'Foo'
         );
     }
 
@@ -36,7 +37,7 @@ class ObjectBrokerSpec extends ObjectBehavior
         $nodeTypeNameTranslator->toSlinpNode('nt:barbar')->willReturn('Foo\\Bar\\SomeObject');
 
         $this->shouldThrow(new \InvalidArgumentException(
-            'Could not find corresponding slinp object class for node type "nt:barbar", or any of its super-types (nt:barbar). Tried: (Foo\Bar\SomeObject)'
+            'Class "Foo" does not exist. When resolving user node class for node-type "nt:barbar"'
         ))->duringExchange($node);
     }
 

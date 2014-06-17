@@ -78,7 +78,7 @@ class ObjectBroker
 
         if (!class_exists($nodeClass)) {
             throw new \InvalidArgumentException(sprintf(
-                'Object class "%s" mapped to node type "%s" does not exist!',
+                'Class "%s" does not exist. When resolving user node class for node-type "%s"',
                 $nodeClass,
                 $ntName
             ));

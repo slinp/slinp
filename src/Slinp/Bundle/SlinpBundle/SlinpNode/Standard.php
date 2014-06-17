@@ -31,7 +31,7 @@ class Standard extends Base implements ObjectBrokerAwareInterface
      * @return ObjectBroker
      * @access protected
      */
-    protected function _objectBroker()
+    protected function objectBroker()
     {
         return $this->objectBroker;
     }
@@ -42,9 +42,9 @@ class Standard extends Base implements ObjectBrokerAwareInterface
      *
      * @return SlinpNodeInterface[]
      */
-    public function _children($nodeTypeFilter = null)
+    public function children($nodeTypeFilter = null)
     {
-        return $this->_objectBroker()->exchangeCollection($this->_node()->getNodes(null, $nodeTypeFilter));
+        return $this->objectBroker()->exchangeCollection($this->node()->getNodes(null, $nodeTypeFilter));
     }
 
     /**
@@ -52,10 +52,10 @@ class Standard extends Base implements ObjectBrokerAwareInterface
      *
      * @return mixed
      */
-    public function _value($name)
+    public function value($name)
     {
-        if ($this->_node()->hasProperty($name)) {
-            return $this->_node()->getPropertyValue($name);
+        if ($this->node()->hasProperty($name)) {
+            return $this->node()->getPropertyValue($name);
         }
 
         return null;
