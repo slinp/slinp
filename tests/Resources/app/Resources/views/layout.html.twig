@@ -28,8 +28,8 @@
             <div class="menu">
                 <ul>
                     <li><a href="{{ path(slinp_context.webRootNode) }}">Home</a></li>
-                    {% for node in slinp_context.webRootNode.nodes %}
-                    <li><a href="{{ path(node) }}">{{ node.name }}</a></li>
+                    {% for node in slinp_context.webRootNode.children %}
+                    <li><a href="{{ path(node) }}">{{ node.node.name }}</a></li>
                     {% endfor %}
                 </ul>
             </div>

@@ -17,7 +17,7 @@ class ObjectBrokerTest extends WebTestCase
         $this->loadFixtures('website.xml');
 
         $ntNameTranslator = $this->getContainer()->get('slinp.util.node_type_name_translator');
-        $this->broker = new ObjectBroker($ntNameTranslator);
+        $this->broker = new ObjectBroker($ntNameTranslator, 'Slinp\Bundle\SlinpBundle\SlinpNode\Standard');
 
         $this->session = $this->getContainer()->get('doctrine_phpcr')->getConnection();
     }

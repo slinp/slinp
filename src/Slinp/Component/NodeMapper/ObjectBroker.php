@@ -5,6 +5,7 @@ namespace Slinp\Component\NodeMapper;
 use PHPCR\NodeInterface;
 use Slinp\Component\NodeMapper\SlinpNodeInterface;
 use Slinp\Bundle\SlinpBundle\Util\NodeTypeNameTranslator;
+use Slinp\Component\NodeMapper\ObjectBrokerAwareInterface;
 
 /**
  * This class will attempt to automatically find a SlinpNode for
@@ -18,15 +19,44 @@ use Slinp\Bundle\SlinpBundle\Util\NodeTypeNameTranslator;
 class ObjectBroker
 {
     protected $nodeTypeNameTranslator;
+    protected $defaultNodeClass;
 
-    public function __construct(NodeTypeNameTranslator $nodeTypeNameTranslator)
+    public function __construct(
+        NodeTypeNameTranslator $nodeTypeNameTranslator,
+        $defaultNodeClass
+    )
     {
         $this->nodeTypeNameTranslator = $nodeTypeNameTranslator;
+        $this->defaultNodeClass = $defaultNodeClass;
     }
 
+    /**
+     * Will exchange an array of PHPCR nodes for an array of Slinp nodes
+     *
+     * @param array $nodes
+     *
+     * @return SlinpNodeInterface[]
+     */
+    public function exchangeCollection($nodes)
+    {
+        $ret = array();
+        foreach ($nodes as $node) {
+            $ret[] = $this->exchange($node);
+        }
+
+        return $ret;
+    }
+
+    /**
+     * Exchange a PHPCR Node for a Slinp Node
+     * 
+     * @param NodeInterface $node
+     *
+     * @return SlinpNodeInterface
+     */
     public function exchange(NodeInterface $node)
     {
-        $objectClass = null;
+        $nodeClass = null;
         $nodeType = $node->getPrimaryNodeType();
         $ntNames = $nodeType->getSupertypeNames();
         array_unshift($ntNames, $nodeType->getName());
@@ -34,37 +64,36 @@ class ObjectBroker
         $tried = array();
 
         foreach ($ntNames as $ntName) {
-            $objectClass = $this->nodeTypeNameTranslator->toSlinpNode($ntName);
-            $tried[] = $objectClass;
+            $nodeClass = $this->nodeTypeNameTranslator->toSlinpNode($ntName);
+            $tried[] = $nodeClass;
 
-            if (class_exists($objectClass)) {
+            if (class_exists($nodeClass)) {
                 break;
             }
         }
 
-        if (!class_exists($objectClass)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Could not find corresponding slinp object class for node type "%s", or any of its super-types (%s). Tried: (%s)',
-                $ntName,
-                implode(', ', $ntNames),
-                implode(', ', array_values($tried))
-            ));
+        if (!class_exists($nodeClass) && $this->defaultNodeClass) {
+            $nodeClass = $this->defaultNodeClass;
         }
 
-        if (!class_exists($objectClass)) {
+        if (!class_exists($nodeClass)) {
             throw new \InvalidArgumentException(sprintf(
-                'Object class "%s" mapped to node type "%s" does not exist!',
-                $objectClass,
+                'Class "%s" does not exist. When resolving user node class for node-type "%s"',
+                $nodeClass,
                 $ntName
             ));
         }
 
-        $object = new $objectClass($node);
+        $object = new $nodeClass($node, $this);
+
+        if ($object instanceof ObjectBrokerAwareInterface) {
+            $object->setObjectBroker($this);
+        }
 
         if (!$object instanceof SlinpNodeInterface) {
             throw new \InvalidArgumentException(sprintf(
                 'Object class "%s" for node type "%s" exists, but it does not implement the SlinpNodeInterface',
-                $objectClass,
+                $nodeClass,
                 $ntName
             ));
         }

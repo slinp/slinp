@@ -4,53 +4,31 @@ namespace Slinp\Bundle\SlinpBundle\SlinpNode;
 
 use Slinp\Component\NodeMapper\SlinpNodeInterface;
 use PHPCR\NodeInterface;
+use Slinp\Component\NodeMapper\ObjectBroker;
+use Slinp\Component\NodeMapper\ObjectBrokerAwareInterface;
 
+/**
+ * Most minimal implementation of the SlinpNodeInterface
+ *
+ * @author Daniel Leech <daniel@dantleech.com>
+ */
 class Base implements SlinpNodeInterface
 {
-    protected $phpcrNode;
+    private $phpcrNode;
 
+    /**
+     * {@inheritDoc}
+     */
     public function __construct(NodeInterface $phpcrNode)
     {
         $this->phpcrNode = $phpcrNode;
     }
 
-    public function getPhpcrNode() 
+    /**
+     * {@inheritDoc}
+     */
+    public function node() 
     {
         return $this->phpcrNode;
-    }
-
-    public function get($property)
-    {
-        return $this->getPhpcrNode()->getPropertyValue($property);
-    }
-
-    /**
-     * @see NodeInterface::getNodes
-     */
-    public function getNodes()
-    {
-        $nodes = array();
-        $thisClass = get_class($this);
-        foreach ($this->phpcrNode->getNodes() as $child) {
-            $nodes[] = new $thisClass($child);
-        }
-
-        return $nodes;
-    }
-
-    /**
-     * @see NodeInterface::getName
-     */
-    public function getName()
-    {
-        return $this->phpcrNode->getName();
-    }
-
-    /**
-     * @see NodeInterface::getPath
-     */
-    public function getPath()
-    {
-        return $this->phpcrNode->getPath();
     }
 }

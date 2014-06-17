@@ -24,23 +24,28 @@ class NodeTypeNameTranslator
      *
      * @param string $nodeTypeName
      *
-     * @return string
+     * @return string|null
      */
     public function toBundleNamespace($nodeTypeName)
     {
         $bundleName = ucfirst(strstr($nodeTypeName, ':', true));
 
-        $bundle = $this->kernel->getBundle($bundleName . 'Bundle');
+        try {
+            $bundle = $this->kernel->getBundle($bundleName . 'Bundle');
+        } catch (\InvalidArgumentException $e) {
+            return null;
+        }
 
         return $bundle->getNamespace();
     }
 
     /**
-     * Translate to controller fs path
+     * Translate to controller fs path or return NULL
+     * if controller does not exist.
      *
      * @param string $nodeTypeName
      *
-     * @return string
+     * @return string|null
      */
     public function toControllerPath($nodeTypeName)
     {
@@ -48,6 +53,11 @@ class NodeTypeNameTranslator
         $controllerClass = sprintf('%s\\Controller\\%sController',
             $this->toBundleNamespace($nodeTypeName), $controllerName
         );
+
+        if (!class_exists($controllerClass)) {
+            return null;
+        }
+
         $reflection = new \ReflectionClass($controllerClass);
         $controllerFilename = $reflection->getFileName();
 

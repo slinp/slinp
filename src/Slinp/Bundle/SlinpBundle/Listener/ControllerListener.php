@@ -17,8 +17,8 @@ class ControllerListener
     public function onKernelController(FilterControllerEvent $event)
     {
         $request = $event->getRequest();
-        if ($request->attributes->has('node')) {
-            $node = $request->attributes->get('node');
+        if ($request->attributes->has('_node')) {
+            $node = $request->attributes->get('_node');
             $resource = $this->objectBroker->exchange($node);
             $request->attributes->set('resource', $resource);
         }

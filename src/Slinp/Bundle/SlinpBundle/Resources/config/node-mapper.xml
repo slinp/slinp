@@ -12,6 +12,7 @@
 
         <service id="slinp.node_mapper.object_broker" class="%slinp.phpcr.object_broker.class%">
             <argument type="service" id="slinp.util.node_type_name_translator" />
+            <argument>Slinp\Bundle\SlinpBundle\SlinpNode\Standard</argument>
         </service>
 
     </services>

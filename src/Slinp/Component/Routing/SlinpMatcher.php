@@ -82,8 +82,9 @@ class SlinpMatcher implements RequestMatcherInterface
 
         $nodeType = $node->getPrimaryNodeType();
         $nodeTypeName = $nodeType->getName();
+        $superTypeNames = $nodeType->getSupertypeNames();
 
-        if (!in_array('slinp:resource', $nodeType->getSupertypeNames())) {
+        if (!in_array('slinp:resource', $superTypeNames)) {
             throw new RouteNotFoundException(sprintf(
                 'Resolved node type "%s" is not a slinp resource.',
                 $nodeTypeName
@@ -92,7 +93,16 @@ class SlinpMatcher implements RequestMatcherInterface
 
         // ======== DETERMINE THE CONTROLLER AND LOAD ROUTES
 
-        $controllerFilename = $this->nodeTypeNameTranslator->toControllerPath($nodeTypeName);
+        $nodeTypeNames = $superTypeNames;
+        array_unshift($nodeTypeNames, $nodeType->getName());
+
+        $controllerFilename = null;
+        foreach ($nodeTypeNames as $nodeTypeName) {
+            $controllerFilename = $this->nodeTypeNameTranslator->toControllerPath($nodeTypeName);
+            if ($controllerFilename !== null) {
+                break;
+            }
+        }
 
         // ======== ADD NODE PREFIX TO ROUTES
 
@@ -114,7 +124,7 @@ class SlinpMatcher implements RequestMatcherInterface
         $requestContext->fromRequest($request);
         $routeMatcher = new UrlMatcher($routes, $requestContext);
         $params = $routeMatcher->match($pathInfo);
-        $params['node'] = $node;
+        $params['_node'] = $node;
 
         return $params;
     }

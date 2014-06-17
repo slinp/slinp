@@ -7,3 +7,5 @@
 
 [slinpTest:articleFolder] > slinp:resource
 + * (slinp:article)
+
+[slinpTest:noController] > slinp:resource

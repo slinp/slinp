@@ -6,6 +6,12 @@ use Symfony\Component\Routing\Loader\AnnotationClassLoader;
 use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\Routing\Route;
 
+/**
+ * Loads Route annotations from controllers.
+ * Extends the routing components AnnotationClassLoader
+ *
+ * @author Daniel Leech <daniel@dantleech.com>
+ */
 class SlinpAnnotationLoader extends AnnotationClassLoader
 {
     public function __construct(Reader $reader)
