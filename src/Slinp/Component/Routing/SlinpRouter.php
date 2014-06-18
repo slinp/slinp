@@ -30,7 +30,7 @@ class SlinpRouter implements RouterInterface, RequestMatcherInterface, ChainedRo
 
     public function supports($name)
     {
-        return $name instanceof Resource;
+        return $this->generator->supports($name);
     }
 
     public function getRouteDebugMessage($name, array $params = array())

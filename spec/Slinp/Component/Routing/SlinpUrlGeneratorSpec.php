@@ -4,8 +4,8 @@ namespace spec\Slinp\Component\Routing;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Slinp\Bundle\SlinpBundle\SlinpNode\Resource;
 use PHPCR\NodeInterface;
+use Slinp\Component\NodeMapper\SlinpNodeInterface;
 
 class SlinpUrlGeneratorSpec extends ObjectBehavior
 {
@@ -20,7 +20,7 @@ class SlinpUrlGeneratorSpec extends ObjectBehavior
     }
 
     function it_should_generate_a_web_path_for_a_resource(
-        Resource $resource,
+        SlinpNodeInterface $resource,
         NodeInterface $node
     )
     {

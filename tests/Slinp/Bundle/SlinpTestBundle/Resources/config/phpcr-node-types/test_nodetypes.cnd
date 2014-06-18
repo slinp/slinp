@@ -1,11 +1,12 @@
 <slinp = "http://slinp.org/ns/1.0">
 <slinpTest = "http://slinp.org/test/ns/1.0">
 
-[slinpTest:article] > slinp:resource
+[slinpTest:article] > nt:base, mix:lastModified
++ * (nt:base)
 - title (string) mandatory
 - body (string) mandatory
 
-[slinpTest:articleFolder] > slinp:resource
-+ * (slinp:article)
+[slinpTest:articleFolder] > nt:base, mix:lastModified
++ * (slinpTest:article)
 
-[slinpTest:noController] > slinp:resource
+[slinpTest:noController] > nt:base, mix:lastModified

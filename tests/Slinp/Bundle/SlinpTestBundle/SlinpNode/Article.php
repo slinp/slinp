@@ -2,8 +2,8 @@
 
 namespace Slinp\Bundle\SlinpTestBundle\SlinpNode;
 
-use Slinp\Bundle\SlinpBundle\SlinpNode\Resource;
+use Slinp\Bundle\SlinpBundle\SlinpNode\Standard;
 
-class Article extends Resource
+class Article extends Standard
 {
 }

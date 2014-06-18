@@ -4,10 +4,10 @@ namespace Slinp\Component\Routing;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RequestContext;
-use Slinp\Bundle\SlinpBundle\SlinpNode\Resource;
+use Slinp\Component\NodeMapper\SlinpNodeInterface;
 
 /**
- * URL generator for Slinp Resource nodes.
+ * URL generator for Slinp nodes.
  *
  * NOTE: This is pretty dumb at the moment and only returns
  *       the web path of the resource, it does not support
@@ -30,6 +30,11 @@ class SlinpUrlGenerator implements UrlGeneratorInterface
         return $this->context;
     }
     
+    public function supports($name)
+    {
+        return $name instanceof SlinpNodeInterface;
+    }
+
     public function setContext(RequestContext $context)
     {
         $this->context = $context;
@@ -37,7 +42,7 @@ class SlinpUrlGenerator implements UrlGeneratorInterface
     
     public function generate($name, $parameters = array(), $referenceType = self::ABSOLUTE_PATH)
     {
-        if ($name instanceof Resource) {
+        if ($name instanceof SlinpNodeInterface) {
             $path = substr($name->node()->getPath(), strlen($this->webRoot . '/root'));
             if (!$path) {
                 $path = '/';
