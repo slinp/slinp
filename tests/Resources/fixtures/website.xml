@@ -11,12 +11,6 @@
       <sv:property sv:name="jcr:primaryType" sv:type="Name">
         <sv:value>slinpTest:article</sv:value>
       </sv:property>
-      <sv:property sv:name="jcr:lastModifiedBy" sv:type="String">
-        <sv:value>admin</sv:value>
-      </sv:property>
-      <sv:property sv:name="jcr:lastModified" sv:type="Date">
-        <sv:value>2014-05-20T18:21:15.000+00:00</sv:value>
-      </sv:property>
       <sv:property sv:name="title" sv:type="String">
         <sv:value>Slinp Web Content Framework</sv:value>
       </sv:property>

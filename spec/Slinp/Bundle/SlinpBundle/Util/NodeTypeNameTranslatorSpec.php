@@ -53,4 +53,10 @@ class NodeTypeNameTranslatorSpec extends ObjectBehavior
 
         $this->toSlinpNode('slinpTest:article')->shouldReturn('Slinp\Bundle\SlinpTestBundle\SlinpNode\Article');
     }
+
+    function it_should_return_the_slinp_bundle_for_nt_node_types(
+    )
+    {
+        $this->toBundleName('nt:foobar')->shouldReturn('SlinpBundle');
+    }
 }

@@ -84,13 +84,6 @@ class SlinpMatcher implements RequestMatcherInterface
         $nodeTypeName = $nodeType->getName();
         $superTypeNames = $nodeType->getSupertypeNames();
 
-        if (!in_array('slinp:resource', $superTypeNames)) {
-            throw new RouteNotFoundException(sprintf(
-                'Resolved node type "%s" is not a slinp resource.',
-                $nodeTypeName
-            ));
-        }
-
         // ======== DETERMINE THE CONTROLLER AND LOAD ROUTES
 
         $nodeTypeNames = $superTypeNames;

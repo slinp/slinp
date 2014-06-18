@@ -8,7 +8,7 @@ use Slinp\Component\NodeMapper\ObjectBroker;
 use PHPCR\NodeInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Slinp\Bundle\SlinpBundle\SlinpNode\Resource;
+use Slinp\Component\NodeMapper\SlinpNodeInterface;
 
 class ControllerListenerSpec extends ObjectBehavior
 {
@@ -28,7 +28,7 @@ class ControllerListenerSpec extends ObjectBehavior
         NodeInterface $node,
         ObjectBroker $objectBroker,
         FilterControllerEvent $event,
-        Resource $resource
+        SlinpNodeInterface $resource
     )
     {
         $request = Request::create('/');
