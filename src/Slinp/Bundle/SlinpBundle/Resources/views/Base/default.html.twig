@@ -2,13 +2,13 @@
 {% block content %}
     <div class="error_container">
         <h1>404 Resource: {{ resource.node.name }}</h1>
-        <p>No controller has been defined for handling this type of content.</p>
+        <p>This resource exists but the request has been handled by the <code>nt:base</code> controller (thats me)</p>
         <p>This resource has the following node types:</p>
         <ul>
             {% for name, map in typeMap %}
                 <li>{{ name }}</li>
             {% endfor %}
         </ul>
-        <p>To handle requests for this resource you need to define a controller which corresponds to the given node type.</p>
+        <p>You could, for example, define a controller in <b>{{ typeMap|first['bundle'] }}</b> called <b>{{ typeMap|first['controller'] }}Controller</b></p>
     </div>
 {% endblock %}
