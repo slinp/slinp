@@ -9,4 +9,4 @@
 [slinpTest:articleFolder] > nt:base, mix:lastModified
 + * (slinpTest:article)
 
-[slinpTest:noController] > nt:base, mix:lastModified
+[slinpTest:noController] > mix:created, nt:base, mix:lastModified
