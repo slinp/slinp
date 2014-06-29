@@ -15,7 +15,7 @@ class BaseController extends Controller
     public function defaultAction(SlinpNodeInterface $resource)
     {
         $nodeNameTranslator = $this->get('slinp.util.node_type_name_translator');
-        $nodeType = $resource->node()->getPrimaryNodeType();
+        $nodeType = $resource->getPrimaryNodeType();
 
         $types = array_merge(
             array($nodeType->getName()),

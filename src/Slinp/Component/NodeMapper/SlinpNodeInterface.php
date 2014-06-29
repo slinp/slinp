@@ -11,7 +11,7 @@ use Slinp\Component\NodeMapper\ObjectBroker;
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-interface SlinpNodeInterface
+interface SlinpNodeInterface extends NodeInterface, \IteratorAggregate
 {
     /**
      * The contructor is passed the PHPCR Node which class instances implementing
@@ -28,5 +28,5 @@ interface SlinpNodeInterface
      *
      * @return PHPCR\NodeInterface
      */
-    public function node();
+    public function getPhpcrNode();
 }
