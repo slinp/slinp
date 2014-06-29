@@ -4,7 +4,7 @@ namespace Slinp\Component\Routing;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RequestContext;
-use Slinp\Component\NodeMapper\SlinpNodeInterface;
+use PHPCR\NodeInterface;
 
 /**
  * URL generator for Slinp nodes.
@@ -32,7 +32,7 @@ class SlinpUrlGenerator implements UrlGeneratorInterface
     
     public function supports($name)
     {
-        return $name instanceof SlinpNodeInterface;
+        return $name instanceof NodeInterface;
     }
 
     public function setContext(RequestContext $context)
@@ -42,8 +42,8 @@ class SlinpUrlGenerator implements UrlGeneratorInterface
     
     public function generate($name, $parameters = array(), $referenceType = self::ABSOLUTE_PATH)
     {
-        if ($name instanceof SlinpNodeInterface) {
-            $path = substr($name->node()->getPath(), strlen($this->webRoot . '/root'));
+        if ($name instanceof NodeInterface) {
+            $path = substr($name->getPath(), strlen($this->webRoot . '/root'));
             if (!$path) {
                 $path = '/';
             }

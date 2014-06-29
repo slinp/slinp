@@ -13,49 +13,20 @@ use Slinp\Component\NodeMapper\ObjectBroker;
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class Standard extends Base implements ObjectBrokerAwareInterface
+class Standard extends Base
 {
-    private $objectBroker;
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setObjectBroker(ObjectBroker $objectBroker)
-    {
-        $this->objectBroker = $objectBroker;
-    }
-
-    /**
-     * Return the object broker
-     *
-     * @return ObjectBroker
-     * @access protected
-     */
-    protected function objectBroker()
-    {
-        return $this->objectBroker;
-    }
-
-    /**
-     * Return the children of this node, optionally you
-     * can specify a node type filter
-     *
-     * @return SlinpNodeInterface[]
-     */
-    public function children($nodeTypeFilter = null)
-    {
-        return $this->objectBroker()->exchangeCollection($this->node()->getNodes(null, $nodeTypeFilter));
-    }
-
     /**
      * Return the named property value
      *
+     * Shortcut for getPropertyValue but also checks that the property exists
+     * and returns null rather than throwing an exception.
+     *
      * @return mixed
      */
-    public function value($name)
+    public function getValue($name)
     {
-        if ($this->node()->hasProperty($name)) {
-            return $this->node()->getPropertyValue($name);
+        if ($this->hasProperty($name)) {
+            return $this->getPropertyValue($name);
         }
 
         return null;

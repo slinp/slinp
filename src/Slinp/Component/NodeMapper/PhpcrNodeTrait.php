@@ -1,6 +1,9 @@
 <?php
 
-namespace Slinp\Component\NodeMapper\PhpcrTrait;
+namespace Slinp\Component\NodeMapper;
+
+use PHPCR\ItemInterface;
+use PHPCR\ItemVisitorInterface;
 
 /**
  * This trait fulfils the PHPCR\NodeInterface for classes implementing
@@ -8,14 +11,14 @@ namespace Slinp\Component\NodeMapper\PhpcrTrait;
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-trait PhpcrTrait
+trait PhpcrNodeTrait
 {
     /**
      * @see PHPCR\NodeInterface#addNode
      */
     public function addNode($relPath, $primaryNodeTypeName = null)
     {
-        return $this->_node()->addNode($relPath, $primaryNodeTypeName);
+        return $this->getPhpcrNode()->addNode($relPath, $primaryNodeTypeName);
     }
 
     /**
@@ -23,7 +26,7 @@ trait PhpcrTrait
      */
     public function addNodeAutoNamed($nameHint = null, $primaryNodeTypeName = null)
     {
-        return $this->_node()->addNodeAutoNamed($nameHint = null, $primaryNodeTypeName);
+        return $this->getPhpcrNode()->addNodeAutoNamed($nameHint = null, $primaryNodeTypeName);
     }
 
     /**
@@ -31,7 +34,7 @@ trait PhpcrTrait
      */
     public function orderBefore($srcChildRelPath, $destChildRelPath)
     {
-        return $this->_node()->orderBefore($srcChildRelPath, $destChildRelPath);
+        return $this->getPhpcrNode()->orderBefore($srcChildRelPath, $destChildRelPath);
     }
 
     /**
@@ -39,7 +42,7 @@ trait PhpcrTrait
      */
     public function rename($newName)
     {
-        return $this->_node()->rename($newName);
+        return $this->getPhpcrNode()->rename($newName);
     }
 
     /**
@@ -47,7 +50,7 @@ trait PhpcrTrait
      */
     public function setProperty($name, $value, $type = null)
     {
-        return $this->_node()->setProperty($name, $value, $type = null);
+        return $this->getPhpcrNode()->setProperty($name, $value, $type = null);
     }
 
     /**
@@ -55,7 +58,7 @@ trait PhpcrTrait
      */
     public function getNode($relPath)
     {
-        return $this->_node()->getNode($relPath);
+        return $this->getPhpcrNode()->getNode($relPath);
     }
 
     /**
@@ -64,10 +67,10 @@ trait PhpcrTrait
     public function getNodes($nameFilter = null, $typeFilter = null)
     {
         $ret = array();
-        $phpcrNodes = $this->_nodes($nameFilter, $typeFilter);
+        $phpcrNodes = $this->getPhpcrNode()->getNodes($nameFilter, $typeFilter);
 
         foreach ($phpcrNodes as $phpcrNode) {
-            $ret[] = $this->_objectBroker()->exchange($phpcrNode);
+            $ret[] = $this->objectBroker()->exchange($phpcrNode);
         }
 
         return $ret;
@@ -78,7 +81,7 @@ trait PhpcrTrait
      */
     public function getNodeNames($nameFilter = null, $typeFilter = null)
     {
-        return $this->_node()->getNodeNames($nameFilter = null, $typeFilter = null);
+        return $this->getPhpcrNode()->getNodeNames($nameFilter = null, $typeFilter = null);
     }
 
     /**
@@ -86,7 +89,7 @@ trait PhpcrTrait
      */
     public function getProperty($relPath)
     {
-        return $this->_node()->getProperty($relPath);
+        return $this->getPhpcrNode()->getProperty($relPath);
     }
 
     /**
@@ -94,7 +97,7 @@ trait PhpcrTrait
      */
     public function getPropertyValue($name, $type=null)
     {
-        return $this->_node()->getPropertyValue($name, $type=null);
+        return $this->getPhpcrNode()->getPropertyValue($name, $type=null);
     }
 
     /**
@@ -102,7 +105,7 @@ trait PhpcrTrait
      */
     public function getPropertyValueWithDefault($relPath, $defaultValue)
     {
-        return $this->_node()->getPropertyValueWithDefault($relPath, $defaultValue);
+        return $this->getPhpcrNode()->getPropertyValueWithDefault($relPath, $defaultValue);
     }
 
     /**
@@ -110,7 +113,7 @@ trait PhpcrTrait
      */
     public function getProperties($nameFilter = null)
     {
-        return $this->_node()->getProperties($nameFilter = null);
+        return $this->getPhpcrNode()->getProperties($nameFilter = null);
     }
 
     /**
@@ -118,7 +121,7 @@ trait PhpcrTrait
      */
     public function getPropertiesValues($nameFilter=null, $dereference=true)
     {
-        return $this->_node()->getPropertiesValues($nameFilter=null, $dereference=true);
+        return $this->getPhpcrNode()->getPropertiesValues($nameFilter=null, $dereference=true);
     }
 
     /**
@@ -126,7 +129,7 @@ trait PhpcrTrait
      */
     public function getPrimaryItem()
     {
-        return $this->_node()->getPrimaryItem();
+        return $this->getPhpcrNode()->getPrimaryItem();
     }
 
     /**
@@ -134,7 +137,7 @@ trait PhpcrTrait
      */
     public function getIdentifier()
     {
-        return $this->_node()->getIdentifier();
+        return $this->getPhpcrNode()->getIdentifier();
     }
 
     /**
@@ -142,7 +145,7 @@ trait PhpcrTrait
      */
     public function getIndex()
     {
-        return $this->_node()->getIndex();
+        return $this->getPhpcrNode()->getIndex();
     }
 
     /**
@@ -150,7 +153,7 @@ trait PhpcrTrait
      */
     public function getReferences($name = null)
     {
-        return $this->_node()->getReferences($name = null);
+        return $this->getPhpcrNode()->getReferences($name = null);
     }
 
     /**
@@ -158,7 +161,7 @@ trait PhpcrTrait
      */
     public function getWeakReferences($name = null)
     {
-        return $this->_node()->getWeakReferences($name = null);
+        return $this->getPhpcrNode()->getWeakReferences($name = null);
     }
 
     /**
@@ -166,7 +169,7 @@ trait PhpcrTrait
      */
     public function hasNode($relPath)
     {
-        return $this->_node()->hasNode($relPath);
+        return $this->getPhpcrNode()->hasNode($relPath);
     }
 
     /**
@@ -174,7 +177,7 @@ trait PhpcrTrait
      */
     public function hasProperty($relPath)
     {
-        return $this->_node()->hasProperty($relPath);
+        return $this->getPhpcrNode()->hasProperty($relPath);
     }
 
     /**
@@ -182,7 +185,7 @@ trait PhpcrTrait
      */
     public function hasNodes()
     {
-        return $this->_node()->hasNodes();
+        return $this->getPhpcrNode()->hasNodes();
     }
 
     /**
@@ -190,7 +193,7 @@ trait PhpcrTrait
      */
     public function hasProperties()
     {
-        return $this->_node()->hasProperties();
+        return $this->getPhpcrNode()->hasProperties();
     }
 
     /**
@@ -198,7 +201,7 @@ trait PhpcrTrait
      */
     public function getPrimaryNodeType()
     {
-        return $this->_node()->getPrimaryNodeType();
+        return $this->getPhpcrNode()->getPrimaryNodeType();
     }
 
     /**
@@ -206,7 +209,7 @@ trait PhpcrTrait
      */
     public function getMixinNodeTypes()
     {
-        return $this->_node()->getMixinNodeTypes();
+        return $this->getPhpcrNode()->getMixinNodeTypes();
     }
 
     /**
@@ -214,7 +217,7 @@ trait PhpcrTrait
      */
     public function isNodeType($nodeTypeName)
     {
-        return $this->_node()->isNodeType($nodeTypeName);
+        return $this->getPhpcrNode()->isNodeType($nodeTypeName);
     }
 
     /**
@@ -222,7 +225,7 @@ trait PhpcrTrait
      */
     public function setPrimaryType($nodeTypeName)
     {
-        return $this->_node()->setPrimaryType($nodeTypeName);
+        return $this->getPhpcrNode()->setPrimaryType($nodeTypeName);
     }
 
     /**
@@ -230,7 +233,7 @@ trait PhpcrTrait
      */
     public function addMixin($mixinName)
     {
-        return $this->_node()->addMixin($mixinName);
+        return $this->getPhpcrNode()->addMixin($mixinName);
     }
 
     /**
@@ -238,7 +241,7 @@ trait PhpcrTrait
      */
     public function removeMixin($mixinName)
     {
-        return $this->_node()->removeMixin($mixinName);
+        return $this->getPhpcrNode()->removeMixin($mixinName);
     }
 
     /**
@@ -246,7 +249,7 @@ trait PhpcrTrait
      */
     public function setMixins(array $mixinNames)
     {
-        return $this->_node()->setMixins($mixinNames);
+        return $this->getPhpcrNode()->setMixins($mixinNames);
     }
 
     /**
@@ -254,7 +257,7 @@ trait PhpcrTrait
      */
     public function canAddMixin($mixinName)
     {
-        return $this->_node()->canAddMixin($mixinName);
+        return $this->getPhpcrNode()->canAddMixin($mixinName);
     }
 
     /**
@@ -262,7 +265,7 @@ trait PhpcrTrait
      */
     public function getDefinition()
     {
-        return $this->_node()->getDefinition();
+        return $this->getPhpcrNode()->getDefinition();
     }
 
     /**
@@ -270,7 +273,7 @@ trait PhpcrTrait
      */
     public function update($srcWorkspace)
     {
-        return $this->_node()->update($srcWorkspace);
+        return $this->getPhpcrNode()->update($srcWorkspace);
     }
 
     /**
@@ -278,7 +281,7 @@ trait PhpcrTrait
      */
     public function getCorrespondingNodePath($workspaceName)
     {
-        return $this->_node()->getCorrespondingNodePath($workspaceName);
+        return $this->getPhpcrNode()->getCorrespondingNodePath($workspaceName);
     }
 
     /**
@@ -286,7 +289,7 @@ trait PhpcrTrait
      */
     public function getSharedSet()
     {
-        return $this->_node()->getSharedSet();
+        return $this->getPhpcrNode()->getSharedSet();
     }
 
     /**
@@ -294,7 +297,7 @@ trait PhpcrTrait
      */
     public function removeSharedSet()
     {
-        return $this->_node()->removeSharedSet();
+        return $this->getPhpcrNode()->removeSharedSet();
     }
 
     /**
@@ -302,7 +305,7 @@ trait PhpcrTrait
      */
     public function removeShare()
     {
-        return $this->_node()->removeShare();
+        return $this->getPhpcrNode()->removeShare();
     }
 
     /**
@@ -310,7 +313,7 @@ trait PhpcrTrait
      */
     public function isCheckedOut()
     {
-        return $this->_node()->isCheckedOut();
+        return $this->getPhpcrNode()->isCheckedOut();
     }
 
     /**
@@ -318,7 +321,7 @@ trait PhpcrTrait
      */
     public function isLocked()
     {
-        return $this->_node()->isLocked();
+        return $this->getPhpcrNode()->isLocked();
     }
 
     /**
@@ -326,7 +329,7 @@ trait PhpcrTrait
      */
     public function followLifecycleTransition($transition)
     {
-        return $this->_node()->followLifecycleTransition($transition);
+        return $this->getPhpcrNode()->followLifecycleTransition($transition);
     }
 
     /**
@@ -334,6 +337,110 @@ trait PhpcrTrait
      */
     public function getAllowedLifecycleTransitions()
     {
-        return $this->_node()->getAllowedLifecycleTransitions();
+        return $this->getPhpcrNode()->getAllowedLifecycleTransitions();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPath()
+    {
+        return $this->getPhpcrNode()->getPath();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+        return $this->getPhpcrNode()->getName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAncestor($depth)
+    {
+        return $this->getPhpcrNode()->getAncestor();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getParent()
+    {
+        return $this->getPhpcrNode()->getParent();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDepth()
+    {
+        return $this->getPhpcrNode()->getDepth();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSession()
+    {
+        return $this->getPhpcrNode()->getSession();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isNode()
+    {
+        return $this->getPhpcrNode()->isNode();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isNew()
+    {
+        return $this->getPhpcrNode()->isNew();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isModified()
+    {
+        return $this->getPhpcrNode()->isModified();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isSame(ItemInterface $otherItem)
+    {
+        return $this->getPhpcrNode()->isSame($otherItem);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function accept(ItemVisitorInterface $visitor)
+    {
+        return $this->getPhpcrNode()->accept();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function revert()
+    {
+        return $this->getPhpcrNode()->revert();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function remove()
+    {
+        return $this->getPhpcrNode()->remove();
     }
 }
