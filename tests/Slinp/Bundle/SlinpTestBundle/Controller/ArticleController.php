@@ -12,6 +12,7 @@ use Slinp\Component\AdminBuilder\Responder\EditResponder;
 use Slinp\Component\AdminBuilder\AdminView;
 use Slinp\Component\AdminBuilder\ViewPrimer\Phpcr\Initializer;
 use Slinp\Component\AdminBuilder\AdminViewPrimerEvents;
+use Slinp\Component\AdminBuilder\Form\PhpcrTypeGuesser;
 
 class ArticleController extends Controller
 {
@@ -35,10 +36,8 @@ class ArticleController extends Controller
         $view->setObject($resource);
         $view->setFormBuilder($this->createFormBuilder($resource));
 
-
         $eventDispatcher = $this->get('event_dispatcher');
-
-        $eventDispatcher->addListener(AdminViewPrimerEvents::INIT, array(new Initializer(), 'prime'));
+        $eventDispatcher->addListener(AdminViewPrimerEvents::INIT, array(new Initializer(new PhpcrTypeGuesser()), 'prime'));
 
         $viewPrimer = new AdminViewPrimer($eventDispatcher);
         $viewPrimer->primeForNode($view, $resource);

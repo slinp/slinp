@@ -5,6 +5,7 @@
 + * (nt:base)
 - title (string) mandatory
 - body (string) mandatory
+- tags (string) multiple
 
 [slinpTest:articleFolder] > nt:base, mix:lastModified
 + * (slinpTest:article)
