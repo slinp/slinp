@@ -11,6 +11,7 @@ class AppKernel extends Kernel
         return array(
             new \Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new \Slinp\Bundle\SlinpBundle\SlinpBundle(),
+            new \Slinp\Bundle\SlinpAdminBundle\SlinpAdminBundle(),
             new \Slinp\Bundle\SlinpTestBundle\SlinpTestBundle(),
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Symfony\Bundle\SecurityBundle\SecurityBundle(),

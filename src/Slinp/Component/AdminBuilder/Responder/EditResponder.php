@@ -17,7 +17,6 @@ class EditResponder
 
     public function getResponse(Request $request, AdminViewIntreface $view)
     {
-        die('here: ' . __FILE__);
         return new Response($this->twig->render(
             'slinp_admin_edit.html.twig', array(
                 'view' => $view,

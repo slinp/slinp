@@ -31,4 +31,12 @@ class WebsiteTest extends WebTestCase
         $this->assertEquals(404, $response->getStatusCode());
         $this->assertContains('404 Resource: nocontroller', $response->getContent());
     }
+
+    public function testEditArticlePage()
+    {
+        $client = $this->createClient();
+        $client->request('GET', '/home/edit');
+        $response = $client->getResponse();
+        die($response);
+    }
 }
