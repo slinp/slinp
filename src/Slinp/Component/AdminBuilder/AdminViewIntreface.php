@@ -1,12 +1,21 @@
 <?php
 
-namespace \home\daniel\www\dantleech\slinp\src\Slinp\Component\AdminBuilder;
+namespace Slinp\Component\AdminBuilder;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormBuilderInterface;
 
 interface AdminViewIntreface
 {
-    public function setAdmin(Admin $admin);
+    public function getTitle();
+    
+    public function setTitle($title);
 
-    public function handleRequest(Request $request);
+    public function getObject();
+    
+    public function setObject($object);
+
+    public function getFormBuilder(); 
+    
+    public function setFormBuilder(FormBuilderInterface $formBuilder);
 }
