@@ -33,7 +33,8 @@ class ArticleController extends Controller
         $resource = $request->get('_node');
         $view = new AdminView();
         $view->setObject($resource);
-        $view->setFormBuilder($this->createFormBuilder());
+        $view->setFormBuilder($this->createFormBuilder($resource));
+
 
         $eventDispatcher = $this->get('event_dispatcher');
 

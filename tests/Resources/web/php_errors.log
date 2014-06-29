@@ -16,3 +16,4 @@
 [29-Jun-2014 14:44:47 UTC] PHP Fatal error:  Class 'Slinp\Bundle\SlinpBundle\SlinpAdminBundle' not found in /home/daniel/www/dantleech/slinp/tests/Resources/app/AppKernel.php on line 14
 [29-Jun-2014 14:45:07 UTC] PHP Fatal error:  Class 'Slinp\Bundle\SlinpAdminBunde\DependencyInjection\Compiler\AddTemplateDirectoryPass' not found in /home/daniel/www/dantleech/slinp/src/Slinp/Bundle/SlinpAdminBundle/SlinpAdminBundle.php on line 15
 [29-Jun-2014 14:50:26 UTC] PHP Fatal error:  Class 'Slinp\Bundle\SlinpAdminBunde\DependencyInjection\Compiler\AddTemplateDirectoryPass' not found in /home/daniel/www/dantleech/slinp/src/Slinp/Bundle/SlinpAdminBundle/SlinpAdminBundle.php on line 15
+[29-Jun-2014 15:06:45 UTC] PHP Fatal error:  Call to a member function setDataMapper() on a non-object in /home/daniel/www/dantleech/slinp/src/Slinp/Component/AdminBuilder/ViewPrimer/Phpcr/Initializer.php on line 22

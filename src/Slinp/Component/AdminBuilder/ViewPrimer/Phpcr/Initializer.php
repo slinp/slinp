@@ -4,6 +4,7 @@ namespace Slinp\Component\AdminBuilder\ViewPrimer\Phpcr;
 
 use PHPCR\NodeInterface;
 use Slinp\Component\AdminBuilder\AdminViewPrimerEvent;
+use Slinp\Component\AdminBuilder\DataMapper\PhpcrDataMapper;
 
 class Initializer
 {
@@ -18,9 +19,12 @@ class Initializer
 
         $view->setTitle($object->getName());
         $formBuilder = $view->getFormBuilder();
+        $formBuilder->setDataMapper(new PhpcrDataMapper());
 
         foreach ($object->getProperties() as $name => $property) {
-            $formBuilder->add($name);
+            if (is_scalar($property->getValue())) {
+                $formBuilder->add($name);
+            }
         }
     }
 

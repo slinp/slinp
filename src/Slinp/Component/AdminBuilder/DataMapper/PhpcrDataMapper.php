@@ -27,8 +27,10 @@ class PhpcrDataMapper implements DataMapperInterface
             $propertyPath = $form->getPropertyPath();
             $config = $form->getConfig();
 
+            $value = $data->getPropertyValue((string) $propertyPath);
+
             // this is very naive
-            $form->setData($data->getPropertyValue($propertyPath));
+            $form->setData($value);
         }
     }
 
