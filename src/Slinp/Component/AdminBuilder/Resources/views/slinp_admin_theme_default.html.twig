@@ -1,0 +1,13 @@
+{% block container_widget %}
+<div class="container">
+    {% for child in widget.children %}
+        {{ renderer.render(child)|raw }}
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block text_widget %}
+<div class="text">
+    {{ widget.text }}
+</div>
+{% endblock %}
