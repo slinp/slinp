@@ -6,13 +6,12 @@ use Slinp\Component\AdminBuilder\WidgetContainerInterface;
 use Slinp\Component\AdminBuilder\WidgetInterface;
 use Slinp\Component\AdminBuilder\AbstractWidget;
 
-class ContainerWidget extends AbstractWidget implements WidgetContainerInterface
+class LayoutWidget implements WidgetContainerInterface
 {
     protected $children;
 
     public function append(WidgetInterface $widget)
     {
-        $widget->setParent($this);
         $this->children[] = $widget;
     }
 
@@ -23,6 +22,18 @@ class ContainerWidget extends AbstractWidget implements WidgetContainerInterface
 
     public function getWidgetType()
     {
-        return 'container_widget';
+        return 'layout_widget';
+    }
+
+    public function setParent(WidgetInterface $widget)
+    {
+        throw new \BadMethodCallException(
+            'Cannot call setParent on LayoutWidget -- layouts do not have parents!'
+        );
+    }
+
+    public function getParent()
+    {
+        return null;
     }
 }

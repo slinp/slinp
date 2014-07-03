@@ -9,6 +9,21 @@ class AdminView implements AdminViewIntreface
     protected $title;
     protected $object;
     protected $formBuilder;
+    protected $layoutWidget;
+    protected $widgetFinder;
+
+    /**
+     * Do not allow overriding the constructor (it is instantiated
+     * blindly outside of the DI context)
+     */
+    final public function __construct()
+    {
+        $this->configure();
+    }
+
+    public function configure()
+    {
+    }
 
     public function getTitle() 
     {
@@ -38,5 +53,15 @@ class AdminView implements AdminViewIntreface
     public function setFormBuilder(FormBuilderInterface $formBuilder)
     {
         $this->formBuilder = $formBuilder;
+    }
+
+    public function getLayoutWidget() 
+    {
+        return $this->layoutWidget;
+    }
+    
+    public function setLayoutWidget(WidgetContainerInterface $layoutWidget)
+    {
+        $this->layoutWidget = $layoutWidget;
     }
 }
