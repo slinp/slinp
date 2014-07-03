@@ -111,6 +111,11 @@ class ArticleController extends Controller
         <sv:property sv:name="body" sv:type="String">
             <sv:value>Welcome Home</sv:value>
         </sv:property>
+        <sv:property sv:name="tags" sv:type="String">
+          <sv:value>automobiles</sv:value>
+          <sv:value>trains</sv:value>
+          <sv:value>planes</sv:value>
+        </sv:property>
         </sv:node>
         <sv:node sv:name="nocontroller">
             <sv:property sv:name="jcr:primaryType" sv:type="Name">

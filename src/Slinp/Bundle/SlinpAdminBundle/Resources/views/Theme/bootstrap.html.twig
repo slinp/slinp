@@ -1,0 +1,45 @@
+{%- block layout_widget -%}
+<html>
+    <head>
+        {% for stylesheet in layout.stylesheets %}
+            <link rel="stylesheet" href="{{ stylesheet }}" />
+        {% endfor %}
+        {% for javascript in layout.javascripts %}
+            <script src="{{ javascript }}" type="text/javascript"></script>
+        {% endfor %}
+    </head>
+    <body>
+        {% for child in widget.children %}
+            {{- renderer.render(child) -}}
+        {% endfor %}
+    </body>
+</html>
+{%- endblock -%}
+
+{%- block container_widget -%}
+<div class="container">
+    {% for child in widget.children %}
+        {{- renderer.render(child)|raw -}}
+    {% endfor %}
+</div>
+{% endblock %}
+
+{%- block text_widget -%}
+<div class="text">
+    {{- widget.text -}}
+</div>
+{% endblock %}
+
+{%- block form_row_widget -%}
+<div class="form-row">
+    {{- form_label(widget.formField) -}}
+    {{- form_errors(widget.formField) -}}
+    {{- form_field(widget.formField) -}}
+</div>
+{%- endblock -%}
+
+{%- block form_widget -%}
+<div class="form">
+    {{- form(widget.form) -}}
+</div>
+{%- endblock -%}
